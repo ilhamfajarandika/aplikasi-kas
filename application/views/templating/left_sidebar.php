@@ -1,0 +1,55 @@
+<!-- ========== Left Sidebar Start ========== -->
+<div class="left side-menu">
+    <button type="button" class="button-menu-mobile button-menu-mobile-topbar open-left waves-effect">
+        <i class="ion-close"></i>
+    </button>
+
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <div class="text-center">
+            <a href="<?= base_url(); ?>" class="logo"><i class="mdi mdi-cash"></i> Kas Kelas</a>
+        </div>
+    </div>
+
+    <div class="sidebar-inner slimscrollleft">
+
+        <div id="sidebar-menu">
+            <ul>
+                <li class="menu-title">Menu</li>
+
+                <li>
+                    <a href="<?= base_url(); ?>" class="waves-effect">
+                        <i class="mdi mdi-airplay"></i>
+                        <span> Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url("transaksi"); ?>" class="waves-effect">
+                        <i class="mdi mdi-autorenew"></i>
+                        <span> Transaksi</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url("laporan"); ?>" class="waves-effect">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span> Laporan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url("anggota"); ?>" class="waves-effect">
+                        <i class="mdi mdi-account-box-outline"></i>
+                        <span> Anggota</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?= base_url("user"); ?>" class="waves-effect">
+                        <i class="mdi mdi-account-multiple"></i>
+                        <span> User</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div> <!-- end sidebarinner -->
+</div>
+<!-- Left Sidebar End -->
