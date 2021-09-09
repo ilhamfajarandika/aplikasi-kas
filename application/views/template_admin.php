@@ -82,10 +82,10 @@
     <?php require_once 'templating/modal/modal_anggota.php' ?>
 
     <!-- Script Kas -->
-    <script src="<?= base_url(); ?>vendor/assets/js/scriptkas/auth.js"></script>
-    <script src="<?= base_url(); ?>vendor/assets/js/scriptkas/transaksi.js"></script>
-    <script src="<?= base_url(); ?>vendor/assets/js/scriptkas/anggota.js"></script>
-    <script src="<?= base_url(); ?>vendor/assets/js/scriptkas/laporan.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/auth.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/transaksi.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/anggota.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/laporan.js"></script>
 
 </body>
 

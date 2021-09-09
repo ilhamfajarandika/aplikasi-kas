@@ -72,7 +72,7 @@ class Laporan extends CI_Controller
             $this->db->where('tanggal BETWEEN "' . date($tanggalMulai) . '" AND "' . date($tanggalAkhir) . '"');
         }
 
-        $sql = "SELECT SUM(IF(jenis = 'M', nominal, -nominal)) AS saldoawal FROM transaksi WHERE tanggal <= '" . date($tanggalMulai) . "'";
+        $sql = "SELECT SUM(IF(jenis = 'M', nominal, -nominal)) AS saldoawal FROM transaksi WHERE tanggal < '" . date($tanggalMulai) . "'";
         $query = $this->db->query($sql);
         $saldoAwal = $query->result_array();
 
@@ -86,13 +86,13 @@ class Laporan extends CI_Controller
         $pdf->Cell(35, 8, '-', 1, 0, 'C');
         $pdf->Cell(60, 8, 'Saldo Awal', 1, 0, 'C');
         $pdf->Cell(15, 8, 'M', 1, 0, 'C');
-        $pdf->Cell(30, 8, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . '0', 1, 0, 'C');
+        $pdf->Cell(30, 8, 'Rp 0', 1, 0, 'C');
+        $pdf->Cell(30, 8, 'Rp 0', 1, 0, 'C');
         $pdf->Cell(30, 8, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 1, 1, 'C');
 
         $data = $this->db->get('vtotal')->result();
         $i = 1;
-        $saldo = 0;
+        $saldo = (int)$saldoAwal[0]['saldoawal'];
         $totalMasuk = 0;
         $totalKeluar = 0;
         $pdf->SetFont('Arial', '', 12);

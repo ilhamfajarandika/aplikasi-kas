@@ -1,15 +1,15 @@
- <link rel="shortcut icon" href=" <?= base_url(); ?>vendor/assets/images/favicon.ico">
+ <link rel="shortcut icon" href=" <?= base_url(); ?>dist/assets/images/favicon.ico">
 
- <link href=" <?= base_url(); ?>vendor/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
- <link href=" <?= base_url(); ?>vendor/assets/css/icons.css" rel="stylesheet" type="text/css">
- <link href=" <?= base_url(); ?>vendor/assets/css/style.css" rel="stylesheet" type="text/css">
+ <link href=" <?= base_url(); ?>dist/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+ <link href=" <?= base_url(); ?>dist/assets/css/icons.css" rel="stylesheet" type="text/css">
+ <link href=" <?= base_url(); ?>dist/assets/css/style.css" rel="stylesheet" type="text/css">
 
 
 
  <!-- DataTables -->
- <link href=" <?= base_url(); ?>vendor/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
- <link href=" <?= base_url(); ?>vendor/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"><!-- Responsive datatable examples -->
- <link href=" <?= base_url(); ?>vendor/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+ <link href=" <?= base_url(); ?>dist/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+ <link href=" <?= base_url(); ?>dist/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css"><!-- Responsive datatable examples -->
+ <link href=" <?= base_url(); ?>dist/assets/plugins/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
  <style>
      .form-group {
          margin-bottom: 10px;

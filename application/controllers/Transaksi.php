@@ -22,11 +22,12 @@ class Transaksi extends CI_Controller
             'judul_modal' => 'Input Transaksi',
             'judul_tombol' => 'Tambah Data',
             'kanan_atas' => '
-                <div class="text-center">
-                    <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_transaksi">
-                        Input Transaksi
-                    </button>
-                </div>
+                <a id="download-template-transaksi" href="http://localhost/aplikasikas/file/download/template_transaksi" title="Download Template Input Transaksi (.csv)" class="btn btn-success waves-effect waves-light m-b-10 m-r-5 text-light">
+                    <i class="ti-download"></i>
+                </a>
+                <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_transaksi">
+                    Input Transaksi
+                </button>
             ',
             'halaman' => $this->load->view('pages/v_transaksi', '', true),
         ];
@@ -257,6 +258,7 @@ class Transaksi extends CI_Controller
             $this->parser->parse('template_page', $data);
         }
     }
+
 
     public function cetak($id)
     {

@@ -31,7 +31,7 @@
     <!-- END wrapper -->
 
     <?php require_once 'templating/js.php' ?>
-    <script src="<?= base_url(); ?>vendor/assets/js/scriptkas/auth.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/auth.js"></script>
 
 
 </body>
