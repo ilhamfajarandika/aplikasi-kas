@@ -4,15 +4,15 @@ Sistem Pengelolaan Uang Kas sederhana
 berbasis web application, dibangun dengan HTML, Bootstrap, Codeigniter 3, dan Jquery.
 Hanya diperutukan untuk pengaturan keuangan yang tidak terlalu kompleks
 
-### Fitur Tertanam
-*******************
+## Fitur Tertanam
 
-- CRUD (Create, Read, Update, Delete),
-- Login & Registrasi,
+- CRUD (Create, Read, Update, Delete)
+- Login & Registrasi
 - Cetak Laporan dengan [FPDF](http://www.fpdf.org/)
 
-### Library, Template, & Framework
-**************************
+## Library & Framework
+
+Menggunakan bantuan beberapa Framework PHP, Library javascript, Framework Bootstrap 
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
 - [JQuery](https://jquery.com/)
@@ -20,8 +20,9 @@ Hanya diperutukan untuk pengaturan keuangan yang tidak terlalu kompleks
 - [Codeigniter 3](https://codeigniter.com/download)
 
 
-### Big Thank's
-*******************
+## Big Thank's
+
+Website yang saya gunakan untuk solve error dan debugging
 
 + [Stackoverflow](https://stackoverflow.com/)
 + [PHP Doc](https://www.php.net/docs.php)
