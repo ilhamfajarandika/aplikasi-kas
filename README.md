@@ -12,23 +12,23 @@ Fitur Tertanam
 
 - CRUD (Create, Read, Update, Delete),
 - Login & Registrasi,
-- Cetak Laporan dengan FPDF `<http://www.fpdf.org/>`
+- Cetak Laporan dengan [FPDF](http://www.fpdf.org/)
+- 
 
 **************************
 Library, Template, & Framework
 **************************
 
-- Bootstrap 4 `<https://getbootstrap.com/docs/4.4/getting-started/introduction/>`
-- Annex Admin `<https://mannatthemes.com/annex/vertical/index.html>`
-- JQuery `<https://jquery.com/>`
-- FPDF `<http://www.fpdf.org/>`
-- Codeigniter 3 `<https://codeigniter.com/download>`
+- [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
+- [JQuery](https://jquery.com/)
+- [FPDF](http://www.fpdf.org/)
+- [Codeigniter 3](https://codeigniter.com/download)
 
 *******************
 Big Thank's
 *******************
 
-Stackoverflow `<https://stackoverflow.com/>`
-PHP Doc `<https://www.php.net/docs.php>`
-W3Schools `<https://www.w3schools.com/>`
-Codeigniter 3 User Guide `<https://codeigniter.com/userguide3/index.html>`
+[Stackoverflow](https://stackoverflow.com/)
+[PHP Doc](https://www.php.net/docs.php)
+[W3Schools](https://www.w3schools.com/)
+[Codeigniter 3 User Guide](https://codeigniter.com/userguide3/index.html)
