@@ -1,22 +1,17 @@
-###################
-Tugas Praktek Kerja Lapangan
-###################
+# H1 Tugas Praktek Kerja Lapangan
 
 Sistem Pengelolaan Uang Kas sederhana 
 berbasis web application, dibangun dengan HTML, Bootstrap, Codeigniter 3, dan Jquery.
 Hanya diperutukan untuk pengaturan keuangan yang tidak terlalu kompleks
 
-*******************
-Fitur Tertanam
+# H3 Fitur Tertanam
 *******************
 
 - CRUD (Create, Read, Update, Delete),
 - Login & Registrasi,
 - Cetak Laporan dengan [FPDF](http://www.fpdf.org/)
-- 
 
-**************************
-Library, Template, & Framework
+# H3 Library, Template, & Framework
 **************************
 
 - [Bootstrap 4](https://getbootstrap.com/docs/4.4/getting-started/introduction/)
@@ -24,8 +19,8 @@ Library, Template, & Framework
 - [FPDF](http://www.fpdf.org/)
 - [Codeigniter 3](https://codeigniter.com/download)
 
-*******************
-Big Thank's
+
+# H3 Big Thank's
 *******************
 
 [Stackoverflow](https://stackoverflow.com/)
