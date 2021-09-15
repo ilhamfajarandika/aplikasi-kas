@@ -4,7 +4,9 @@
  <link href=" <?= base_url(); ?>dist/assets/css/icons.css" rel="stylesheet" type="text/css">
  <link href=" <?= base_url(); ?>dist/assets/css/style.css" rel="stylesheet" type="text/css">
 
-
+ <!-- Dropzone CSS -->
+ <link href="<?= base_url(); ?>dist/assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
+ <link href="<?= base_url(); ?>dist/assets/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
 
  <!-- DataTables -->
  <link href=" <?= base_url(); ?>dist/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">

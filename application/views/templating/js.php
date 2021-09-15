@@ -32,7 +32,9 @@
 <!-- App js -->
 <script src="<?= base_url(); ?>dist/assets/js/app.js"></script>
 
-
+<!-- Dropzone JS -->
+<script src="<?= base_url(); ?>dist/assets/plugins/dropzone/dist/dropzone.js"></script>
+<script src="<?= base_url(); ?>dist/assets/plugins/dropify/js/dropify.min.js"></script>
 
 <!-- Script Kas
 <script src="<?= base_url(); ?>dist/assets/js/scriptkas/transaksi.js"></script>

@@ -20,9 +20,7 @@ class Anggota extends CI_Controller
             'judul_modal' => 'Tambah Anggota',
             'judul_tombol' => 'Tambah Data',
             'kanan_atas' => '
-                <a id="download-template-anggota" href="http://localhost/aplikasikas/file/download/template_anggota" title="Download Template Anggota (.csv)" class="btn btn-success waves-effect waves-light m-b-10 m-r-5 text-light">
-                    <i class="ti-download"></i>
-                </a>
+                
                 <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_anggota">
                     Tambah Anggota
                 </button>

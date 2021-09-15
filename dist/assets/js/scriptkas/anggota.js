@@ -44,6 +44,18 @@ function ambilDataAnggota() {
             $("#tabel_anggota").DataTable({
                 processing: true,
                 data: data.post,
+                dom:  "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-5'f>>"+
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: [
+                    {
+                        text: ' <i class="mdi mdi-download"></i> Download CSV',
+                        className: "btn btn-success",
+                        action: function ( e, dt, node, config ) {
+                            location = 'http://localhost/aplikasikas/file/fExportAnggota';
+                        }
+                    }
+                ],
                 columns: [
                     {
                         "render": function () { 
@@ -55,8 +67,8 @@ function ambilDataAnggota() {
                         "data": null,
                         "render": function (data, type, row, meta) { 
                             a = `
-                                <a class="btn btn-sm btn-warning text-light" data-id="${row.idanggota}" href="" role="button" id="edit-anggota" data-toggle="modal" data-target="#modal_tambah_anggota"><i class="mdi mdi-border-color" ></i></a>
-                                <a class="btn btn-sm btn-danger" data-id="${row.idanggota}" href="" role="button" id="hapus-anggota"><i class="mdi mdi-delete"></i></a>
+                                <a class="btn btn-sm btn-warning text-light" data-id="${row.idanggota}" href="" role="button" id="edit-anggota" data-toggle="modal" data-target="#modal_tambah_anggota"><i class="ti-pencil" ></i></a>
+                                <a class="btn btn-sm btn-danger" data-id="${row.idanggota}" href="" role="button" id="hapus-anggota"><i class="ti-trash"></i></a>
                             `;
                             return a; 
                         }
@@ -68,6 +80,48 @@ function ambilDataAnggota() {
     });
 }
 ambilDataAnggota();
+
+$(document).on("submit", "#form_import_anggota", function (e) {
+	e.preventDefault();
+	$.ajax({
+		type: "post",
+		url: "http://localhost/aplikasikas/file/fImportAnggota",
+		data: new FormData(this),
+        dataType: "json",
+		contentType: false, 
+        cache: false, 
+        processData: false, 
+		beforeSend: function () {
+			let timerInterval
+			Swal.fire({
+                width: '100px',
+				timer: 2000,
+				timerProgressBar: true,
+				didOpen: () => {
+					Swal.showLoading()
+				},
+				willClose: () => {
+					clearInterval(timerInterval)
+				}
+			})
+		},
+		success: function (data) {
+			// console.log(data);
+            let inputFile = $("#csv-file-anggota");
+            // inputFile.replaceWith(inputFile.val('').clone(true));
+			// $("#csv-file-anggota").wrap('<form>').closest('form').get(0).reset();
+			$("#modal_tambah_anggota").modal('hide');
+			$("#tombol-import-csv").attr("disabled", false);
+			Swal.fire(
+			    'Sukses!',
+			    data.message,
+			    'success'
+			);
+			$('#tabel_anggota').DataTable().destroy();
+            ambilDataAnggota();
+		}
+	});
+});
 
 $(document).on("click", "#tambah-anggota", function (e) {
     e.preventDefault();
@@ -222,4 +276,12 @@ $(document).ready(function () {
             bersih();
         });
     } 
+
+    $(".insert").on("click", function (e) { 
+        $("#tambah-anggota").css("display", "none");
+    })
+    
+    $(".active").on("click", function (e) { 
+        $("#tambah-anggota").css("display", "block");
+    })
 });

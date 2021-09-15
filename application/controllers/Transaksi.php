@@ -23,7 +23,7 @@ class Transaksi extends CI_Controller
             'judul_tombol' => 'Tambah Data',
             'kanan_atas' => '
                 <a id="download-template-transaksi" href="http://localhost/aplikasikas/file/download/template_transaksi" title="Download Template Input Transaksi (.csv)" class="btn btn-success waves-effect waves-light m-b-10 m-r-5 text-light">
-                    <i class="ti-download"></i>
+                    Download Template
                 </a>
                 <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_transaksi">
                     Input Transaksi
