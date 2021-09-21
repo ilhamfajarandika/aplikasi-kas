@@ -9,6 +9,8 @@ Hanya diperutukan untuk pengaturan keuangan yang tidak terlalu kompleks
 - CRUD (Create, Read, Update, Delete)
 - Login & Registrasi
 - Cetak Laporan dengan [FPDF](http://www.fpdf.org/)
+- Cetak Kwitansi
+- Import dan Export data dengan file CSV
 
 ## Library & Framework
 
@@ -19,8 +21,7 @@ Menggunakan bantuan beberapa Framework PHP, Library javascript, Framework Bootst
 - [FPDF](http://www.fpdf.org/)
 - [Codeigniter 3](https://codeigniter.com/download)
 
-
-## Big Thank's
+## Big Thanks
 
 Website yang saya gunakan untuk solve error dan debugging
 
