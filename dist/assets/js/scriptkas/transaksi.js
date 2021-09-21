@@ -15,6 +15,10 @@ $(document).ready(function () {
 		});
 	}
 
+	// $("#tabel_transaksi_filter :input").attr("placeholder", "Search..");
+	// var tombol = $("#tabel_transaksi_filter :input").html();
+	// console.log(tombol);
+
 	if (label.innerHTML = "Detail Data Transaksi") {
 		$(document).on("click", ".keluar", function () {
 			bersih();
@@ -324,18 +328,22 @@ function ambilDataPemasukan() {
 			$("#tabel_transaksi").DataTable({
 				processing: true,
 				data: data.post,
-				dom:  "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-5'f>>" +
+				dom:  "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4 tombol-download'B><'col-sm-12 col-md-5 tab-search'f>>" +
 						"<'row'<'col-sm-12'tr>>" +
 						"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 buttons: [
                     {
-                        text: ' <i class="mdi mdi-download"></i> Download CSV',
+                        text: 'Download CSV',
                         className: "btn btn-success",
                         action: function ( e, dt, node, config ) {
                             location = 'http://localhost/aplikasikas/file/fExportTransaksi';
                         }
                     }
                 ],
+				language: {
+					search: "_INPUT_",
+					searchPlaceholder: "Search..."
+				},
 				columns: [{
 						"render": function () {
 							return ++i;
@@ -345,10 +353,10 @@ function ambilDataPemasukan() {
 						"data": null,
 						"render": function (data, type, row, meta) {
 							a = `
-                            <a class="btn btn-sm btn-primary" href="#" data-id="${row.id}" data-toggle="modal" data-target="#modal_tambah_transaksi" id="detail-transaksi"><i class="ti-info"></i></a>
-                            <a class="btn btn-sm btn-warning text-light" data-id="${row.id}" text-light" href="" role="button" id="edit-transaksi" data-toggle="modal" data-target="#modal_tambah_transaksi"><i class="ti-pencil"></i></a>
-                            <a class="btn btn-sm btn-danger" data-id="${row.id}" href="" role="button" id="hapus-transaksi"><i class="ti-trash"></i></a>
-                            <a class="btn btn-sm btn-warning text-light" value="${row.id}" name="kwitansi" href="http://localhost/aplikasikas/transaksi/cetak/${row.id}" target="_blank" role="button" id="cetak-transaksi"><i class="ti-printer"></i></a>
+                            <a class="btn btn-sm btn-primary" href="#" data-id="${row.id}" data-toggle="modal" data-target="#modal_tambah_transaksi" id="detail-transaksi" title="Detail Data"><i class="mdi mdi-information-outline"></i></a>
+                            <a class="btn btn-sm btn-warning text-light" data-id="${row.id}" text-light" href="" role="button" id="edit-transaksi" data-toggle="modal" data-target="#modal_tambah_transaksi" title="Edit Data"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a class="btn btn-sm btn-danger" data-id="${row.id}" href="" role="button" id="hapus-transaksi" title="Hapus Data"><i class="mdi mdi-delete"></i></a>
+                            <a class="btn btn-sm btn-success text-light" value="${row.id}" name="kwitansi" href="http://localhost/aplikasikas/transaksi/cetak/${row.id}" target="_blank" role="button" id="cetak-transaksi" title="Cetak Kwitansi"><i class="mdi mdi-printer"></i></a>
                             `;
 							return a;
 						}

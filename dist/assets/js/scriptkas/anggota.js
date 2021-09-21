@@ -49,13 +49,17 @@ function ambilDataAnggota() {
                         "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
                 buttons: [
                     {
-                        text: ' <i class="mdi mdi-download"></i> Download CSV',
+                        text: 'Download CSV',
                         className: "btn btn-success",
                         action: function ( e, dt, node, config ) {
                             location = 'http://localhost/aplikasikas/file/fExportAnggota';
                         }
                     }
                 ],
+                language: {
+					search: "_INPUT_",
+					searchPlaceholder: "Search..."
+				},
                 columns: [
                     {
                         "render": function () { 
@@ -67,8 +71,8 @@ function ambilDataAnggota() {
                         "data": null,
                         "render": function (data, type, row, meta) { 
                             a = `
-                                <a class="btn btn-sm btn-warning text-light" data-id="${row.idanggota}" href="" role="button" id="edit-anggota" data-toggle="modal" data-target="#modal_tambah_anggota"><i class="ti-pencil" ></i></a>
-                                <a class="btn btn-sm btn-danger" data-id="${row.idanggota}" href="" role="button" id="hapus-anggota"><i class="ti-trash"></i></a>
+                                <a class="btn btn-sm btn-warning text-light" data-id="${row.idanggota}" href="" role="button" id="edit-anggota" data-toggle="modal" data-target="#modal_tambah_anggota" title="Edit Data"><i class="mdi mdi-lead-pencil" ></i></a>
+                                <a class="btn btn-sm btn-danger" data-id="${row.idanggota}" href="" role="button" id="hapus-anggota" title="Edit Data"><i class="mdi mdi-delete"></i></a>
                             `;
                             return a; 
                         }

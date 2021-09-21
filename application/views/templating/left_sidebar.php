@@ -29,11 +29,25 @@
                         <span> Transaksi</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?= base_url("laporan"); ?>" class="waves-effect">
+
+                <li class="has_sub">
+                    <a href="javascript:void(0);" class="waves-effect">
                         <i class="mdi mdi-clipboard-outline"></i>
-                        <span> Laporan</span>
+                        <span> Laporan </span>
+                        <i class="mdi mdi-chevron-right float-right"></i>
                     </a>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="<?= base_url("laporan"); ?>" class="waves-effect">
+                                <span>Tabel Border</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?= base_url("laporan/strip"); ?>" class="waves-effect">
+                                <span>Tabel Garis</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="<?= base_url("anggota"); ?>" class="waves-effect">

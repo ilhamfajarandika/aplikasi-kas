@@ -47,9 +47,17 @@
          margin-left: -40px;
      }
 
+     .accountbg {
+         background-image: url(https://source.unsplash.com/1600x1050/?nature);
+     }
+
      li.list-group-item.card-text {
          border: none;
          padding: 3px 3px 3px 0;
          tab-size: 2;
+     }
+
+     .tombol-download {
+         float: right;
      }
  </style>

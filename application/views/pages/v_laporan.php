@@ -4,8 +4,8 @@
         <h6 class="text-muted fw-400">Tanggal</h6>
         <div>
             <div class="input-daterange input-group" id="date-range">
-                <input type="date" class="form-control" name="tgl-mulai" id="tgl-mulai" placeholder="Tanggal Mulai" />
-                <input type="date" class="form-control" name="tgl-akhir" id="tgl-akhir" placeholder="Tanggal Akhir" />
+                <input type="date" class="form-control" name="tgl-mulai" required oninvalid="this.setCustomValidity('Tanggal harus diisi')" id="tgl-mulai" placeholder="Tanggal Mulai" />
+                <input type="date" class="form-control" name="tgl-akhir" required oninvalid="this.setCustomValidity('Tanggal harus diisi')" id="tgl-akhir" placeholder="Tanggal Akhir" />
             </div>
         </div>
         <div class="form-group m-t-15">
