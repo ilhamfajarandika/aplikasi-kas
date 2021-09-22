@@ -15,10 +15,6 @@ $(document).ready(function () {
 		});
 	}
 
-	// $("#tabel_transaksi_filter :input").attr("placeholder", "Search..");
-	// var tombol = $("#tabel_transaksi_filter :input").html();
-	// console.log(tombol);
-
 	if (label.innerHTML = "Detail Data Transaksi") {
 		$(document).on("click", ".keluar", function () {
 			bersih();
@@ -171,15 +167,15 @@ $(document).on("click", "#detail-transaksi", function (e) {
 			$('#nama').val(element.idanggota).attr({
 				'readonly': true,
 				'disabled': true
-			});
-			$('#notransaksi').val(element.notransaksi).attr('readonly', true);
-			$('#tanggal').val(element.tanggal).attr('readonly', true);
-			$('#nominal').val(element.nominal).attr('readonly', true);
-			$('#rincian').val(element.rincian).attr('readonly', true);
+			}).css("background-color", "#fff");
+			$('#notransaksi').val(element.notransaksi).attr('readonly', true).css("background-color", "#fff");
+			$('#tanggal').val(element.tanggal).attr('readonly', true).css("background-color", "#fff");
+			$('#nominal').val(element.nominal).attr('readonly', true).css("background-color", "#fff");
+			$('#rincian').val(element.rincian).attr('readonly', true).css("background-color", "#fff");
 			$('#jenis').val(element.jenis).attr({
 				'readonly': true,
 				'disabled': true
-			});
+			}).css("background-color", "#fff");
 		}
 	});
 });
@@ -193,6 +189,7 @@ $(document).on("click", "#edit-transaksi", function (e) {
 	$("#label_modal_tambah_transaksi").html("Edit Data Transaksi");
 	$(".close").addClass("keluar");
 	$("#tombol-keluar").addClass("keluar");
+	$("ul.nav.nav-tabs").css("display", "none");
 
 	$.ajax({
 		type: "post",
@@ -205,7 +202,7 @@ $(document).on("click", "#edit-transaksi", function (e) {
 			$('#notransaksi').val(data.post[0].notransaksi).attr({
 				'readonly': true,
 				'disabled': true
-			});
+			}).css("background-color", "#fff");
 			$('#nama').val(data.post[0].idanggota);
 			$('#idtransaksi').val(data.post[0].idtransaksi)
 			$('#tanggal').val(data.post[0].tanggal);

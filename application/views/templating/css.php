@@ -48,7 +48,7 @@
      }
 
      .accountbg {
-         background-image: url(https://source.unsplash.com/1600x1050/?nature);
+         background-image: url(https://source.unsplash.com/1225x725/?nature);
      }
 
      li.list-group-item.card-text {
@@ -60,4 +60,6 @@
      .tombol-download {
          float: right;
      }
+
+     /* .tombol-download>.btn-group {} */
  </style>

@@ -12,6 +12,9 @@ class Transaksi extends CI_Controller
         $this->load->library('pdf');
         date_default_timezone_set("Asia/Jakarta");
         $this->load->helper('tanggal_helper');
+        if (!$this->session->userdata('nama')) {
+            redirect('login', 'refresh');
+        }
     }
 
     public function index()
@@ -268,32 +271,29 @@ class Transaksi extends CI_Controller
 
         $data = $this->db->get_where('vtransaksi', ['id' => $id])->result();
 
-
-        // header
-        // $pdf->SetFont('Arial', 'B', 16);
-        // $pdf->Cell(280, 7, 'LAPORAN TRANSAKSI KAS', 0, 1, 'C');
-        // $pdf->SetFont('Arial', 'B', 14);
-        // $pdf->Cell(280, 7, 'TOKO KELONTONG ABAH SEKELUARGA', 0, 1, 'C');
-        // $pdf->SetFont('Arial', 'B', 12);
-        // $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju', 0, 0, 'C');
-        // $pdf->Line(20, 34, 280, 34);
-        // $pdf->SetLineWidth(.5);
-
         $pdf->RoundedRect(10, 15, 190, 128, 5, '1234', 'D');
         $pdf->SetXY(15, 20);
         $pdf->Cell(180, 15, '', 0, 1, 'C');
 
-        $pdf->SetXY(20, 20);
+        $pdf->SetXY(15, 20);
+        $image1 = base_url('dist/assets/images/laporan.png');
+        $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 30);
+
+        $pdf->SetXY(46, 20);
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(180, 15, 'LAPORAN TRANSAKSI KAS', 0, 1, 'L');
 
-        $pdf->SetXY(20, 30);
+        $pdf->SetXY(46, 29);
         $pdf->SetFont('Arial', 'B', 9);
         $pdf->Cell(190, 7, 'TOKO KELONTONG ABAH SEKELUARGA', 0, 1, 'L');
 
+        $pdf->SetXY(46, 34);
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(190, 7, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 1, 'L');
+
         foreach ($data as $row) {
 
-            $pdf->SetXY(140, 25);
+            $pdf->SetXY(140, 26);
             $pdf->SetFont('Arial', 'B', 10);
             $pdf->Cell(50, 10, 'No : ' . $row->notransaksi, 1, 1, 'C');
 
@@ -330,16 +330,6 @@ class Transaksi extends CI_Controller
             $pdf->Cell(142, 8, date('d-m-Y', strtotime($row->tanggal)), 'B', 1, 'L');
         }
 
-
-        // $pdf->SetXY(15, 20);
-        // $pdf->Cell(20, 120, '', 0, 1, 'C');
-
-        // $pdf->SetXY(15, 133);
-        // $pdf->Cell(180, 7, '', 0, 1, 'C');
-
-        // $pdf->SetXY(175, 20);
-        // $pdf->Cell(20, 120, '', 0, 1, 'C');
-
         $pdf->SetXY(150, 50);
         $pdf->Cell(20, 120, 'Malang, ' . tanggalLaporan(date('Y-m-d')), 0, 1, 'C');
 
@@ -347,7 +337,7 @@ class Transaksi extends CI_Controller
         $pdf->Cell(20, 120, $this->session->userdata('nama'), 0, 1, 'C');
 
         $pdf->SetXY(95, 79);
-        $pdf->Cell(20, 120, 'Dicetak : ' . date('d-m-Y') . ' ' . date('H:i:s') . '  ' .  $this->session->userdata('nama'), 0, 1, 'C');
+        $pdf->Cell(20, 120, 'Printed_' . date('d-m-Y') . '_' . date('H:i:s') . '_' .  $this->session->userdata('nama'), 0, 1, 'C');
 
         $pdf->SetFont('Arial', 'B', 14);
         $pdf->SetXY(250, 50);

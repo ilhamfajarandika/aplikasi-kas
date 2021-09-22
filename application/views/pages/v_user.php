@@ -1,12 +1,15 @@
 <?php
 $user = $this->db->get('user')->result_array();
 $this->load->helper('tanggal_helper');
+$i = 0;
 foreach ($user as $row) : ?>
     <div class="col-md-4 float-left">
 
         <!-- Simple card -->
         <div class="card m-b-30">
-            <img class="card-img-top img-fluid" src="<?= base_url("vendor/assets/images/small/img-1.jpg"); ?>" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="https://source.unsplash.com/1600x1050/?<?= $i++; ?>" alt="Card image cap">
+            <!-- <img class="card-img-top img-fluid" src="<?php //echo base_url("vendor/assets/images/small/img-1.jpg"); 
+                                                            ?>" alt="Card image cap"> -->
             <div class="card-body">
                 <h4 class="card-title font-20 mt-0 mb-10"><?= $row['nama']; ?></h4>
                 <ul class="list-group list-group-flush m-b-10">

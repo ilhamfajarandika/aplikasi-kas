@@ -11,6 +11,9 @@ class Laporan extends CI_Controller
         $this->load->library('pdf');
         $this->load->model('Model_transaksi', 'transaksi');
         date_default_timezone_set("Asia/Jakarta");
+        if (!$this->session->userdata('nama')) {
+            redirect('login', 'refresh');
+        }
     }
 
     public function index()

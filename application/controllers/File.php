@@ -10,6 +10,9 @@ class File extends CI_Controller
         parent::__construct();
         $this->load->helper(['url', 'download']);
         $this->load->model('Model_file', 'file');
+        if (!$this->session->userdata('nama')) {
+            redirect('login', 'refresh');
+        }
     }
 
     public function download()
