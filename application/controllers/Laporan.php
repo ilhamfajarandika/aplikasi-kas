@@ -32,26 +32,39 @@ class Laporan extends CI_Controller
         $this->parser->parse('template_admin', $data);
     }
 
-    public function strip()
+    public function cetak()
     {
-        $data = [
-            'title' => 'Kas - Laporan Transaksi',
-            'judul_halaman' => 'Halaman Laporan Transaksi',
-            'kanan_atas' => '
-                <ol class="breadcrumb hide-phone p-0 m-0">
-                    <li class="breadcrumb-item"><a href="#">Kas</a></li>
-                    <li class="breadcrumb-item"><a href="#">Laporan</a></li>
-                </ol>
-            ',
-            'halaman' => $this->load->view('pages/v_laporan_strip', '', true),
-        ];
-        $this->parser->parse('template_admin', $data);
+        if ($this->input->is_ajax_request()) {
+            $tanggalMulai = $this->input->post('tanggalawal');
+            $tanggalAkhir = $this->input->post('tanggalakhir');
+            $tabel = $this->input->post('modeltable');
+
+            $tanggal = [
+                'tglmulai' => $tanggalMulai,
+                'tglakhir' => $tanggalAkhir
+            ];
+
+            $this->session->set_userdata($tanggal);
+
+            if ($tabel == "border") {
+                $data = [
+                    'tabel' => 'border'
+                ];
+            } else {
+                $data = [
+                    'tabel' => 'strip'
+                ];
+            }
+
+            echo json_encode($data);
+        }
     }
 
-    public function cetakLaporan()
+    public function cetakborder()
     {
-        $rTanggalMulai = $this->input->post('tgl-mulai');
-        $rTanggalAkhir = $this->input->post('tgl-akhir');
+        // echo "ok";
+        $rTanggalMulai = $this->session->userdata('tglmulai');
+        $rTanggalAkhir = $this->session->userdata('tglakhir');
         $image1 = base_url('dist/assets/images/laporan.png');
 
         // header
@@ -61,7 +74,7 @@ class Laporan extends CI_Controller
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->Cell(280, 7, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju', 0, 1, 'R');
+        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju, Kotabaru', 0, 1, 'R');
         $pdf->SetFont('Arial', '', 12);
         $pdf->Cell(281, 7, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
 
@@ -169,10 +182,10 @@ class Laporan extends CI_Controller
         $pdf->Output('I', 'Cetak Laporan.pdf');
     }
 
-    public function cetakLaporanStrip()
+    public function cetakstrip()
     {
-        $rTanggalMulai = $this->input->post('tanggal_mulai_laporan_strip');
-        $rTanggalAkhir = $this->input->post('tanggal_akhir_laporan_strip');
+        $rTanggalMulai = $this->session->userdata('tglmulai');
+        $rTanggalAkhir = $this->session->userdata('tglakhir');
         $image1 = base_url('dist/assets/images/laporan.png');
 
         // header
@@ -182,7 +195,7 @@ class Laporan extends CI_Controller
         $pdf->SetFont('Arial', 'B', 16);
         $pdf->Cell(280, 7, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju', 0, 1, 'R');
+        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju, Kotabaru', 0, 1, 'R');
         $pdf->SetFont('Arial', '', 12);
         $pdf->Cell(281, 7, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
 
@@ -197,7 +210,7 @@ class Laporan extends CI_Controller
         $pdf->SetFont('Arial', 'B', 12);
         $pdf->Cell(32, 8, 'Tanggal Cetak ', 0, 0);
         $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(31, 8, ':   ' . date('m-d-Y') . ' ' . date('H:i:s'), 0, 1,);
+        $pdf->Cell(31, 8, ':   ' . date('d-m-Y') . ' ' . date('H:i:s'), 0, 1,);
         if (!empty($rTanggalMulai) && !empty($rTanggalAkhir)) {
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->Cell(32, 8, 'Tanggal Awal ', 0, 0);

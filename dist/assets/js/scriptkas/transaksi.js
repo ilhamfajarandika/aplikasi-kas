@@ -29,6 +29,8 @@ $(document).ready(function () {
 		$('label[for="notransaksi"]').css("display", "none");
 		$("#notransaksi").css("display", "none");
 		$("ul.nav.nav-tabs").css("display", "flex");
+		$("#label_modal_tambah_transaksi").html("Tambah Data Transaksi");
+		$("#tambah-transaksi").html("Tambah Data");
 	});
 
 	$(".dz-default.dz-message > span").html("Pilih file untuk di import (.csv)");
@@ -148,7 +150,8 @@ $(document).on("click", "#detail-transaksi", function (e) {
 	$(".notransaksi").css("display", "block");
 	$('label[for="notransaksi"]').css("display", "block");
 	$("#notransaksi").css("display", "block");
-	$("#tambah-transaksi").remove();
+	$("#tambah-transaksi").css("display", "none");
+	$("#update-transaksi").css("display", "none");
 	$("#label_modal_tambah_transaksi").html("Detail Data Transaksi");
 	$(".close").addClass("keluar");
 	$("#tombol-keluar").addClass("keluar");
@@ -186,6 +189,7 @@ $(document).on("click", "#edit-transaksi", function (e) {
 
 	$("#tambah-transaksi").html("Edit Data");
 	$("#tambah-transaksi").attr("id", "update-transaksi");
+	$("#update-transaksi").css("display", "block");
 	$("#label_modal_tambah_transaksi").html("Edit Data Transaksi");
 	$(".close").addClass("keluar");
 	$("#tombol-keluar").addClass("keluar");

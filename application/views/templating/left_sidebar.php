@@ -30,7 +30,7 @@
                     </a>
                 </li>
 
-                <li class="has_sub">
+                <!-- <li class="has_sub">
                     <a href="javascript:void(0);" class="waves-effect">
                         <i class="mdi mdi-clipboard-outline"></i>
                         <span> Laporan </span>
@@ -48,6 +48,12 @@
                             </a>
                         </li>
                     </ul>
+                </li> -->
+                <li>
+                    <a href="<?= base_url("laporan"); ?>" class="waves-effect">
+                        <i class="mdi mdi-clipboard-outline"></i>
+                        <span>Laporan</span>
+                    </a>
                 </li>
                 <li>
                     <a href="<?= base_url("anggota"); ?>" class="waves-effect">
