@@ -36,6 +36,11 @@
 <script src="<?= base_url(); ?>dist/assets/plugins/dropzone/dist/dropzone.js"></script>
 <script src="<?= base_url(); ?>dist/assets/plugins/dropify/js/dropify.min.js"></script>
 
+<!--Morris Chart-->
+<!-- <script src=" <?= base_url(); ?>dist/assets/plugins/morris/morris.min.js"></script>
+<script src=" <?= base_url(); ?>dist/assets/plugins/raphael/raphael-min.js"></script>
+<script src=" <?= base_url(); ?>dist/assets/pages/morris.init.js"></script> -->
+
 <!-- Script Kas
 <script src="<?= base_url(); ?>dist/assets/js/scriptkas/transaksi.js"></script>
 <script src="<?= base_url(); ?>dist/assets/js/scriptkas/anggota.js"></script>
