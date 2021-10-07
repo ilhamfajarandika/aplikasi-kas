@@ -71,5 +71,13 @@
          line-height: 55px;
      }
 
+     .itanggal {
+         margin: 2px 5px 0px 0px;
+     }
+
+     #tanggal {
+         text-transform: uppercase;
+     }
+
      /* .tombol-download>.btn-group {} */
  </style>

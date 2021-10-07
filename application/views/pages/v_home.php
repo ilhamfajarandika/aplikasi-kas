@@ -9,9 +9,18 @@
     </div>
     <div class="col-md-12 col-lg-12 col-xl-3">
         <div class="card m-b-30">
+            <div class="card-header bg-primary">
+                <h5 class="m-0 header-title text-light">Tanggal</h5>
+            </div>
             <div class="card-body">
-                <h5 class="header-title pb-3 mt-0 text-center" id="tanggal"></h5>
-                <h5 class="header-title pb-3 mt-0 text-center" id="clock"></h5>
+                <div class="col" style="padding: 0px 5px;">
+                    <i class="mdi mdi-calendar float-left itanggal"></i>
+                    <h5 class="font-16" id="tanggal"><?= tanggalLaporan(date('Y-m-d')) ?></h5>
+                </div>
+                <div class="col" style="padding-left: 5px;">
+                    <i class="mdi mdi-alarm float-left itanggal"></i>
+                    <h5 class="font-16" id="clock"></h5>
+                </div>
             </div>
         </div>
     </div>
@@ -20,13 +29,38 @@
 
 <script>
     const tahun = new Date();
+
+    function fWaktu() {
+        var waktu = new Date();
+        var jam = waktu.getHours();
+        var menit = waktu.getMinutes();
+        var detik = waktu.getSeconds();
+
+        jam = updateWaktu(jam);
+        menit = updateWaktu(menit);
+        detik = updateWaktu(detik);
+
+        document.getElementById("clock").innerText = jam + " : " + menit + " : " + detik;
+        var t = setTimeout(function() {
+            fWaktu()
+        }, 1000);
+    }
+
+    function updateWaktu(k) {
+        if (k < 10) {
+            return "0" + k;
+        } else {
+            return k;
+        }
+    }
+
+    fWaktu();
+
     $.ajax({
         type: "post",
         url: "http://localhost/aplikasikas/home/chart",
         dataType: "json",
         success: function(data) {
-            console.log(data);
-
             var dTran = data;
             var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
