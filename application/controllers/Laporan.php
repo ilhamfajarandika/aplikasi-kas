@@ -60,64 +60,64 @@ class Laporan extends CI_Controller
         }
     }
 
+
     public function cetakborder()
     {
-        // echo "ok";
         $rTanggalMulai = $this->session->userdata('tglmulai');
         $rTanggalAkhir = $this->session->userdata('tglakhir');
         $image1 = base_url('dist/assets/images/laporan.png');
 
         // header
-        $pdf = new FPDF('P', 'mm', 'A3');
+        $pdf = new FPDF('L', 'mm', 'A3');
         $pdf->AddPage();
-        $pdf->Image($image1, $pdf->GetX(), 7, 33.78);
+        $pdf->Image($image1, $pdf->GetX(), 4, 47);
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(280, 7, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju, Kotabaru', 0, 1, 'R');
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(281, 7, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
+        $pdf->Cell(398, 9, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(398, 8, 'Jl. Jeruk No. 14, Sukamaju, Kotabaru', 0, 1, 'R');
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(399, 8, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
 
         $pdf->SetLineWidth(.3);
-        $pdf->Line(10, 36, 290, 36);
+        $pdf->Line(10, 45, 409, 45);
         $pdf->Ln(5);
-        $pdf->Cell(10, 12, '', 0, 1);
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(32, 8, 'Admin ', 0, 0);
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(45, 8, ':   ' . $this->session->userdata('nama'), 0, 0);
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(32, 8, 'Tanggal Cetak ', 0, 0);
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(31, 8, ':   ' . date('d-m-Y') . ' ' . date('H:i:s'), 0, 1,);
+        $pdf->Cell(10, 20, '', 0, 1);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(34, 9, 'Admin ', 0, 0);
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(50, 9, ':   ' . $this->session->userdata('nama'), 0, 0);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(38, 9, 'Tanggal Cetak ', 0, 0);
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(31, 9, ':   ' . date('d-m-Y') . ' ' . date('H:i:s'), 0, 1,);
         if (!empty($rTanggalMulai) && !empty($rTanggalAkhir)) {
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(32, 8, 'Tanggal Awal ', 0, 0);
-            $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(45, 8, ':   ' . date('d-m-Y', strtotime($rTanggalMulai)), 0, 0);
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(32, 8, 'Tanggal Akhir ', 0, 0,);
-            $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(31, 8, ':   ' . date('d-m-Y', strtotime($rTanggalAkhir)), 0, 1,);
+            $pdf->SetFont('Arial', 'B', 14);
+            $pdf->Cell(34, 9, 'Tanggal Awal ', 0, 0);
+            $pdf->SetFont('Arial', '', 14);
+            $pdf->Cell(50, 9, ':   ' . date('d-m-Y', strtotime($rTanggalMulai)), 0, 0);
+            $pdf->SetFont('Arial', 'B', 14);
+            $pdf->Cell(38, 9, 'Tanggal Akhir ', 0, 0,);
+            $pdf->SetFont('Arial', '', 14);
+            $pdf->Cell(31, 9, ':   ' . date('d-m-Y', strtotime($rTanggalAkhir)), 0, 1,);
         } else {
-            $pdf->Cell(32, 8, 'Tanggal Awal ', 0, 0,);
-            $pdf->Cell(31, 8, ':   -', 0, 1);
-            $pdf->Cell(32, 8, 'Tanggal Akhir ', 0, 1,);
-            $pdf->Cell(31, 8, ':   -', 0, 1);
+            $pdf->Cell(38, 9, 'Tanggal Awal ', 0, 0,);
+            $pdf->Cell(31, 9, ':   -', 0, 1);
+            $pdf->Cell(38, 9, 'Tanggal Akhir ', 0, 1,);
+            $pdf->Cell(31, 9, ':   -', 0, 1);
         }
         $pdf->Cell(10, 4, '', 0, 1);
 
         //  tabel transaksi
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(10, 8, 'No', 1, 0, 'C');
-        $pdf->Cell(40, 8, 'Nomor Transaksi', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Tanggal', 1, 0, 'C');
-        $pdf->Cell(35, 8, 'Nama', 1, 0, 'C');
-        $pdf->Cell(60, 8, 'Rincian', 1, 0, 'C');
-        $pdf->Cell(15, 8, 'Jenis', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Masuk', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Keluar', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Saldo', 1, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 14.5);
+        $pdf->Cell(15, 11, 'No', 1, 0, 'C');
+        $pdf->Cell(60, 11, 'Nomor Transaksi', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Tanggal', 1, 0, 'C');
+        $pdf->Cell(70, 11, 'Nama', 1, 0, 'C');
+        $pdf->Cell(75, 11, 'Rincian', 1, 0, 'C');
+        $pdf->Cell(20, 11, 'Jenis', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Masuk', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Keluar', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Saldo', 1, 1, 'C');
 
         if (!empty($rTanggalMulai) && !empty($rTanggalAkhir)) {
             $this->db->where('tanggal BETWEEN "' . date($rTanggalMulai) . '" AND "' . date($rTanggalAkhir) . '"');
@@ -127,40 +127,37 @@ class Laporan extends CI_Controller
         $query = $this->db->query($sql);
         $saldoAwal = $query->result_array();
 
-        // var_dump($saldoAwal);
-        // die;
-
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(10, 8, '1', 1, 0, 'C');
-        $pdf->Cell(40, 8, '-', 1, 0, 'C');
-        $pdf->Cell(30, 8, '-', 1, 0, 'C');
-        $pdf->Cell(35, 8, '-', 1, 0, 'C');
-        $pdf->Cell(60, 8, 'Saldo Awal', 1, 0, 'C');
-        $pdf->Cell(15, 8, 'M', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp 0', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp 0', 1, 0, 'C');
-        $pdf->Cell(30, 8, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 1, 1, 'C');
+        $pdf->SetFont('Arial', '', 14.5);
+        $pdf->Cell(15, 11, '1', 1, 0, 'C');
+        $pdf->Cell(60, 11, '-', 1, 0, 'C');
+        $pdf->Cell(40, 11, '-', 1, 0, 'C');
+        $pdf->Cell(70, 11, '-', 1, 0, 'C');
+        $pdf->Cell(75, 11, 'Saldo Awal', 1, 0, 'C');
+        $pdf->Cell(20, 11, 'M', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Rp 0', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Rp 0', 1, 0, 'C');
+        $pdf->Cell(40, 11, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 1, 1, 'C');
 
         $data = $this->db->get('vtotal')->result();
         $i = 1;
         $saldo = (int)$saldoAwal[0]['saldoawal'];
         $totalMasuk = 0;
         $totalKeluar = 0;
-        $pdf->SetFont('Arial', '', 12);
+        $pdf->SetFont('Arial', '', 14.5);
         foreach ($data as $row) {
-            $pdf->Cell(10, 8, ++$i, 1, 0, 'C');
-            $pdf->Cell(40, 8, $row->notransaksi, 1, 0, 'C');
-            $pdf->Cell(30, 8, date('d-m-Y', strtotime($row->tanggal)), 1, 0, 'C');
-            $pdf->Cell(35, 8, $row->nama, 1, 0, 'C');
+            $pdf->Cell(15, 11, ++$i, 1, 0, 'C');
+            $pdf->Cell(60, 11, $row->notransaksi, 1, 0, 'C');
+            $pdf->Cell(40, 11, date('d-m-Y', strtotime($row->tanggal)), 1, 0, 'C');
+            $pdf->Cell(70, 11, $row->nama, 1, 0, 'C');
             if ($row->rincian == "indomie") {
                 $pdf->setFillColor(36, 255, 58);
-                $pdf->Cell(60, 8, $row->rincian, 1, 0, 'C', true);
+                $pdf->Cell(75, 11, $row->rincian, 1, 0, 'C', true);
             } else {
-                $pdf->Cell(60, 8, $row->rincian, 1, 0, 'C');
+                $pdf->Cell(75, 11, $row->rincian, 1, 0, 'C');
             }
-            $pdf->Cell(15, 8, $row->jenis, 1, 0, 'C');
-            $pdf->Cell(30, 8, 'Rp ' . number_format($row->Masuk, 0, ".", "."), 1, 0, 'C');
-            $pdf->Cell(30, 8, 'Rp ' . number_format($row->Keluar, 0, ".", "."), 1, 0, 'C');
+            $pdf->Cell(20, 11, $row->jenis, 1, 0, 'C');
+            $pdf->Cell(40, 11, 'Rp ' . number_format($row->Masuk, 0, ".", "."), 1, 0, 'C');
+            $pdf->Cell(40, 11, 'Rp ' . number_format($row->Keluar, 0, ".", "."), 1, 0, 'C');
             if ($row->jenis == "M") {
                 $saldo = $saldo + $row->Masuk;
                 $totalMasuk = $totalMasuk + $row->Masuk;
@@ -168,15 +165,15 @@ class Laporan extends CI_Controller
                 $saldo = $saldo - $row->Keluar;
                 $totalKeluar = $totalKeluar + $row->Keluar;
             }
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(30, 8, 'Rp ' . number_format($saldo, 0, ".", "."), 1, 1, 'C');
-            $pdf->SetFont('Arial', '', 12);
+            $pdf->SetFont('Arial', 'B', 14.5);
+            $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 1, 1, 'C');
+            $pdf->SetFont('Arial', '', 14.5);
         }
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(190, 8, 'Total', 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 1, 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($saldo, 0, ".", "."), 1, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 14.5);
+        $pdf->Cell(280, 11, 'Total', 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 1, 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 1, 1, 'C');
         $pdf->SetXY(35, 25);
 
         $pdf->Output('I', 'Cetak Laporan.pdf');
@@ -189,56 +186,56 @@ class Laporan extends CI_Controller
         $image1 = base_url('dist/assets/images/laporan.png');
 
         // header
-        $pdf = new FPDF('P', 'mm', 'A3');
+        $pdf = new FPDF('L', 'mm', 'A3');
         $pdf->AddPage();
-        $pdf->Image($image1, $pdf->GetX(), 7, 33.78);
+        $pdf->Image($image1, $pdf->GetX(), 4, 47);
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Cell(280, 7, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(280, 7, 'Jl. Jeruk No. 12, Sukamaju, Kotabaru', 0, 1, 'R');
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(281, 7, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
+        $pdf->Cell(398, 9, 'LAPORAN TRANSAKSI KAS', 0, 1, 'R');
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(398, 8, 'Jl. Jeruk No. 14, Sukamaju, Kotabaru', 0, 1, 'R');
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(399, 8, 'Telp : 0888-7577-1937 | email : abah@sekeluarga.com ', 0, 0, 'R');
 
         $pdf->SetLineWidth(.3);
-        $pdf->Line(10, 36, 290, 36);
+        $pdf->Line(10, 45, 409, 45);
         $pdf->Ln(5);
-        $pdf->Cell(10, 12, '', 0, 1);
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(32, 8, 'Admin ', 0, 0);
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(45, 8, ':   ' . $this->session->userdata('nama'), 0, 0);
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(32, 8, 'Tanggal Cetak ', 0, 0);
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(31, 8, ':   ' . date('d-m-Y') . ' ' . date('H:i:s'), 0, 1,);
+        $pdf->Cell(10, 20, '', 0, 1);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(34, 9, 'Admin ', 0, 0);
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(50, 9, ':   ' . $this->session->userdata('nama'), 0, 0);
+        $pdf->SetFont('Arial', 'B', 14);
+        $pdf->Cell(38, 9, 'Tanggal Cetak ', 0, 0);
+        $pdf->SetFont('Arial', '', 14);
+        $pdf->Cell(31, 9, ':   ' . date('d-m-Y') . ' ' . date('H:i:s'), 0, 1,);
         if (!empty($rTanggalMulai) && !empty($rTanggalAkhir)) {
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(32, 8, 'Tanggal Awal ', 0, 0);
-            $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(45, 8, ':   ' . date('d-m-Y', strtotime($rTanggalMulai)), 0, 0);
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(32, 8, 'Tanggal Akhir ', 0, 0,);
-            $pdf->SetFont('Arial', '', 12);
-            $pdf->Cell(31, 8, ':   ' . date('d-m-Y', strtotime($rTanggalAkhir)), 0, 1,);
+            $pdf->SetFont('Arial', 'B', 14);
+            $pdf->Cell(34, 9, 'Tanggal Awal ', 0, 0);
+            $pdf->SetFont('Arial', '', 14);
+            $pdf->Cell(50, 9, ':   ' . date('d-m-Y', strtotime($rTanggalMulai)), 0, 0);
+            $pdf->SetFont('Arial', 'B', 14);
+            $pdf->Cell(38, 9, 'Tanggal Akhir ', 0, 0,);
+            $pdf->SetFont('Arial', '', 14);
+            $pdf->Cell(31, 9, ':   ' . date('d-m-Y', strtotime($rTanggalAkhir)), 0, 1,);
         } else {
-            $pdf->Cell(32, 8, 'Tanggal Awal ', 0, 0,);
-            $pdf->Cell(31, 8, ':   -', 0, 1);
-            $pdf->Cell(32, 8, 'Tanggal Akhir ', 0, 1,);
-            $pdf->Cell(31, 8, ':   -', 0, 1);
+            $pdf->Cell(38, 9, 'Tanggal Awal ', 0, 0,);
+            $pdf->Cell(31, 9, ':   -', 0, 1);
+            $pdf->Cell(38, 9, 'Tanggal Akhir ', 0, 1,);
+            $pdf->Cell(31, 9, ':   -', 0, 1);
         }
         $pdf->Cell(10, 4, '', 0, 1);
 
         //  tabel transaksi
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(10, 8, 'No', 'BLT', 0, 'C');
-        $pdf->Cell(40, 8, 'Nomor Transaksi', 'BT', 0, 'C');
-        $pdf->Cell(30, 8, 'Tanggal', 'BT', 0, 'C');
-        $pdf->Cell(35, 8, 'Nama', 'BT', 0, 'C');
-        $pdf->Cell(60, 8, 'Rincian', 'BT', 0, 'C');
-        $pdf->Cell(15, 8, 'Jenis', 'BT', 0, 'C');
-        $pdf->Cell(30, 8, 'Masuk', 'BT', 0, 'C');
-        $pdf->Cell(30, 8, 'Keluar', 'BT', 0, 'C');
-        $pdf->Cell(30, 8, 'Saldo', 'BRT', 1, 'C');
+        $pdf->SetFont('Arial', 'B', 14.5);
+        $pdf->Cell(15, 11, 'No', 'LBT', 0, 'C');
+        $pdf->Cell(60, 11, 'Nomor Transaksi', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Tanggal', 'BT', 0, 'C');
+        $pdf->Cell(70, 11, 'Nama', 'BT', 0, 'C');
+        $pdf->Cell(75, 11, 'Rincian', 'BT', 0, 'C');
+        $pdf->Cell(20, 11, 'Jenis', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Masuk', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Keluar', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Saldo', 'RBT', 1, 'C');
 
         if (!empty($rTanggalMulai) && !empty($rTanggalAkhir)) {
             $this->db->where('tanggal BETWEEN "' . date($rTanggalMulai) . '" AND "' . date($rTanggalAkhir) . '"');
@@ -248,35 +245,37 @@ class Laporan extends CI_Controller
         $query = $this->db->query($sql);
         $saldoAwal = $query->result_array();
 
-        // var_dump($saldoAwal);
-        // die;
-
-        $pdf->SetFont('Arial', '', 12);
-        $pdf->Cell(10, 8, '1', 'LB', 0, 'C');
-        $pdf->Cell(40, 8, '-', 'B', 0, 'C');
-        $pdf->Cell(30, 8, '-', 'B', 0, 'C');
-        $pdf->Cell(35, 8, '-', 'B', 0, 'C');
-        $pdf->Cell(60, 8, 'Saldo Awal', 'B', 0, 'C');
-        $pdf->Cell(15, 8, 'M', 'B', 0, 'C');
-        $pdf->Cell(30, 8, 'Rp 0', 'B', 0, 'C');
-        $pdf->Cell(30, 8, 'Rp 0', 'B', 0, 'C');
-        $pdf->Cell(30, 8, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 'BR', 1, 'C');
+        $pdf->SetFont('Arial', '', 14.5);
+        $pdf->Cell(15, 11, '1', 'LBT', 0, 'C');
+        $pdf->Cell(60, 11, '-', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, '-', 'BT', 0, 'C');
+        $pdf->Cell(70, 11, '-', 'BT', 0, 'C');
+        $pdf->Cell(75, 11, 'Saldo Awal', 'BT', 0, 'C');
+        $pdf->Cell(20, 11, 'M', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Rp 0', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Rp 0', 'BT', 0, 'C');
+        $pdf->Cell(40, 11, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 'RBT', 1, 'C');
 
         $data = $this->db->get('vtotal')->result();
         $i = 1;
         $saldo = (int)$saldoAwal[0]['saldoawal'];
         $totalMasuk = 0;
         $totalKeluar = 0;
-        $pdf->SetFont('Arial', '', 12);
+        $pdf->SetFont('Arial', '', 14.5);
         foreach ($data as $row) {
-            $pdf->Cell(10, 8, ++$i, 'LB', 0, 'C');
-            $pdf->Cell(40, 8, $row->notransaksi, 'B', 0, 'C');
-            $pdf->Cell(30, 8, date('d-m-Y', strtotime($row->tanggal)), 'B', 0, 'C');
-            $pdf->Cell(35, 8, $row->nama, 'B', 0, 'C');
-            $pdf->Cell(60, 8, $row->rincian, 'B', 0, 'C',);
-            $pdf->Cell(15, 8, $row->jenis, 'B', 0, 'C');
-            $pdf->Cell(30, 8, 'Rp ' . number_format($row->Masuk, 0, ".", "."), 'B', 0, 'C');
-            $pdf->Cell(30, 8, 'Rp ' . number_format($row->Keluar, 0, ".", "."), 'B', 0, 'C');
+            $pdf->Cell(15, 11, ++$i, 'LBT', 0, 'C');
+            $pdf->Cell(60, 11, $row->notransaksi, 'BT', 0, 'C');
+            $pdf->Cell(40, 11, date('d-m-Y', strtotime($row->tanggal)), 'BT', 0, 'C');
+            $pdf->Cell(70, 11, $row->nama, 'BT', 0, 'C');
+            if ($row->rincian == "indomie") {
+                $pdf->setFillColor(36, 255, 58);
+                $pdf->Cell(75, 11, $row->rincian, 'BT', 0, 'C', true);
+            } else {
+                $pdf->Cell(75, 11, $row->rincian, 'BT', 0, 'C');
+            }
+            $pdf->Cell(20, 11, $row->jenis, 'BT', 0, 'C');
+            $pdf->Cell(40, 11, 'Rp ' . number_format($row->Masuk, 0, ".", "."), 'BT', 0, 'C');
+            $pdf->Cell(40, 11, 'Rp ' . number_format($row->Keluar, 0, ".", "."), 'BT', 0, 'C');
             if ($row->jenis == "M") {
                 $saldo = $saldo + $row->Masuk;
                 $totalMasuk = $totalMasuk + $row->Masuk;
@@ -284,15 +283,15 @@ class Laporan extends CI_Controller
                 $saldo = $saldo - $row->Keluar;
                 $totalKeluar = $totalKeluar + $row->Keluar;
             }
-            $pdf->SetFont('Arial', 'B', 12);
-            $pdf->Cell(30, 8, 'Rp ' . number_format($saldo, 0, ".", "."), 'BR', 1, 'C');
-            $pdf->SetFont('Arial', '', 12);
+            $pdf->SetFont('Arial', 'B', 14.5);
+            $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 'BTR', 1, 'C');
+            $pdf->SetFont('Arial', '', 14.5);
         }
-        $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(190, 8, 'Total', 'LB', 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 'B', 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 'B', 0, 'C');
-        $pdf->Cell(30, 8, 'Rp ' . number_format($saldo, 0, ".", "."), 'BR', 1, 'C');
+        $pdf->SetFont('Arial', 'B', 14.5);
+        $pdf->Cell(280, 11, 'Total', 'BLT', 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 'BT', 0, 'C');
+        $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 'BTR', 1, 'C');
         $pdf->SetXY(35, 25);
 
         $pdf->Output('I', 'Cetak Laporan.pdf');

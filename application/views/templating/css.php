@@ -75,8 +75,31 @@
          margin: 2px 5px 0px 0px;
      }
 
+     .col {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+     }
+
+     #clock {
+         margin: 8px;
+         font-size: 1.2em;
+     }
+
+     #clock::after {
+         content: "";
+         display: inline-block;
+         position: absolute;
+         border-right: 1.4px solid black;
+         margin-left: 8px;
+         height: 80px;
+         bottom: -4px;
+     }
+
      #tanggal {
-         text-transform: uppercase;
+
+         margin: 8px;
+         /* padding: 5px; */
      }
 
      /* .tombol-download>.btn-group {} */

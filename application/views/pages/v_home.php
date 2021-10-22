@@ -14,12 +14,17 @@
             </div>
             <div class="card-body">
                 <div class="col" style="padding: 0px 5px;">
-                    <i class="mdi mdi-calendar float-left itanggal"></i>
-                    <h5 class="font-16" id="tanggal"><?= tanggalLaporan(date('Y-m-d')) ?></h5>
-                </div>
-                <div class="col" style="padding-left: 5px;">
-                    <i class="mdi mdi-alarm float-left itanggal"></i>
                     <h5 class="font-16" id="clock"></h5>
+                    <h5 class="font-16" id="tanggal">
+                        <?php
+                        $tanggal = tanggalLaporan(date('Y-m-d'));
+                        $hari = substr($tanggal, 0, 2);
+                        $bulan = strtoupper(bulanLaporan(date('Y-m-d')));
+                        $tahun = date('Y');
+
+                        echo "{$hari} </br> {$bulan} </br> {$tahun}";
+                        ?>
+                    </h5>
                 </div>
             </div>
         </div>
@@ -40,7 +45,7 @@
         menit = updateWaktu(menit);
         detik = updateWaktu(detik);
 
-        document.getElementById("clock").innerText = jam + " : " + menit + " : " + detik;
+        document.getElementById("clock").innerText = jam + " : " + menit;
         var t = setTimeout(function() {
             fWaktu()
         }, 1000);

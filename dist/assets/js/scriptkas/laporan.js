@@ -1,12 +1,14 @@
 $(document).ready(function () {
     const tanggal = new Date();
-    const hariAwal = tanggal.getDate();
+    const hariAwal = (tanggal.getDate() < 10) ? '0' + tanggal.getDate() : tanggal.getDate();
     const hariAkhir =  new Date(tanggal.getFullYear(), tanggal.getMonth()+1, 0);
-    const bulan = (tanggal.getMonth() < 10) ? '0'+(tanggal.getMonth()+1) : tanggal.getMonth() +1;
+    const bulan = (tanggal.getMonth() < 9) ? '0'+(tanggal.getMonth()+1) : tanggal.getMonth() +1;
     const tahun = tanggal.getFullYear();
     
     $("#tgl-mulai").val(`${tahun}-${bulan}-${hariAwal}`);
     $("#tgl-akhir").val(`${tahun}-${bulan}-${hariAkhir.getDate()}`);
+
+    console.log(bulan);
     
     let tanggalawal = $("#tgl-mulai").val();
     let tanggalakhir = $("#tgl-akhir").val();

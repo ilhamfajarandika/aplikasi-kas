@@ -17,3 +17,19 @@ if (!function_exists('tanggalLaporan')) {
         }
     }
 }
+if (!function_exists('bulanLaporan')) {
+    function bulanLaporan($tanggal)
+    {
+        if ($tanggal == null) {
+            return 'DSO : NULL';
+        } else {
+            $tanggal   = $tanggal <> null ? $tanggal : '2017.01.01';
+            $mBulan    = substr($tanggal, 5, 2);
+            // //
+            //1 => Menetukan nilai awal array dengan nilai awal 1, jika kosong nilai awal tersisi dengan nilai 0
+            $bulan = array(1 =>   'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember');
+            //
+            return $bulan[(int) $mBulan];
+        }
+    }
+}
