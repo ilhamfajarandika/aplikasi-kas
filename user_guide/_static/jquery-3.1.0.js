@@ -1103,7 +1103,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		(subWindow = document.defaultView) && subWindow.top !== subWindow ) {
 
 		// Support: IE 11, Edge
-		if ( subWindow.addEventListener ) {
+		if ( subWindow.ntListener ) {
 			subWindow.addEventListener( "unload", unloadHandler, false );
 
 		// Support: IE 9 - 10 only

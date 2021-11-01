@@ -8,7 +8,8 @@
             <li class="list-inline-item dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user text-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <small><?= $this->session->userdata('nama'); ?></small> |
-                    <img src="https://source.unsplash.com/1600x1050/?cow" alt="user" class="rounded-circle">
+                    <img src="https://picsum.photos/200/300?cow" alt="user" class="rounded-circle">
+                    <!-- <img src="https://source.unsplash.com/1600x1050/?cow" alt="user" class="rounded-circle"> -->
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->

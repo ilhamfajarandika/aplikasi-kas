@@ -54,7 +54,8 @@
      }
 
      .accountbg {
-         background-image: url(https://source.unsplash.com/1225x725/?nature);
+         /* background: url(https://source.unsplash.com/1225x725/?nature); */
+         background: url(https://picsum.photos/1225/725?nature);
      }
 
      li.list-group-item.card-text {
@@ -99,8 +100,5 @@
      #tanggal {
 
          margin: 8px;
-         /* padding: 5px; */
      }
-
-     /* .tombol-download>.btn-group {} */
  </style>

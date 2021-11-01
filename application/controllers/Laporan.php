@@ -174,6 +174,13 @@ class Laporan extends CI_Controller
         $pdf->Cell(40, 11, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 1, 0, 'C');
         $pdf->Cell(40, 11, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 1, 0, 'C');
         $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 1, 1, 'C');
+        $pdf->SetFont('Arial', '', 16);
+        $pdf->Cell(450, 30, 'Malang, ' . date("d-m-Y"), 0, 0, 'C');
+        $pdf->Cell(-200, 30, 'Malang, ' . date("d-m-Y"), 0, 1, 'C');
+        $pdf->Cell(450, 30, $this->session->userdata('nama'), 0, 0, 'C');
+        $pdf->Cell(-200, 30, 'Bapak Ali', 0, 1, 'C');
+        $pdf->Cell(450, -10, 'Admin', 0, 0, 'C');
+        $pdf->Cell(-200, -10, 'Pengawas', 0, 1, 'C');
         $pdf->SetXY(35, 25);
 
         $pdf->Output('I', 'Cetak Laporan.pdf');
@@ -292,6 +299,13 @@ class Laporan extends CI_Controller
         $pdf->Cell(40, 11, 'Rp ' . number_format($totalMasuk, 0, ".", "."), 'BT', 0, 'C');
         $pdf->Cell(40, 11, 'Rp ' . number_format($totalKeluar, 0, ".", "."), 'BT', 0, 'C');
         $pdf->Cell(40, 11, 'Rp ' . number_format($saldo, 0, ".", "."), 'BTR', 1, 'C');
+        $pdf->SetFont('Arial', '', 16);
+        $pdf->Cell(450, 30, 'Malang, ' . date("d-m-Y"), 0, 0, 'C');
+        $pdf->Cell(-200, 30, 'Malang, ' . date("d-m-Y"), 0, 1, 'C');
+        $pdf->Cell(450, 30, $this->session->userdata('nama'), 0, 0, 'C');
+        $pdf->Cell(-200, 30, 'Bapak Ali', 0, 1, 'C');
+        $pdf->Cell(450, -10, 'Admin', 0, 0, 'C');
+        $pdf->Cell(-200, -10, 'Pengawas', 0, 1, 'C');
         $pdf->SetXY(35, 25);
 
         $pdf->Output('I', 'Cetak Laporan.pdf');
