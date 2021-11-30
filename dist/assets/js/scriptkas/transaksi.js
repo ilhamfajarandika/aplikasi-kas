@@ -2,20 +2,20 @@ $(document).ready(function () {
 	const label = $("#label_modal_tambah_transaksi");
 
 	function bersih() {
-		$('#nama').val("Pilih Nama Anggota").attr({
-			'readonly': false,
-			'disabled': false
+		$("#nama").val("Pilih Nama Anggota").attr({
+			readonly: false,
+			disabled: false,
 		});
-		$('#tanggal').val("").attr('readonly', false);
-		$('#nominal').val("").attr('readonly', false);
-		$('#rincian').val("").attr('readonly', false);
-		$('#jenis').val("Pilih Jenis").attr({
-			'readonly': false,
-			'disabled': false
+		$("#tanggal").val("").attr("readonly", false);
+		$("#nominal").val("").attr("readonly", false);
+		$("#rincian").val("").attr("readonly", false);
+		$("#jenis").val("Pilih Jenis").attr({
+			readonly: false,
+			disabled: false,
 		});
 	}
 
-	if (label.innerHTML = "Detail Data Transaksi") {
+	if ((label.innerHTML = "Detail Data Transaksi")) {
 		$(document).on("click", ".keluar", function () {
 			bersih();
 		});
@@ -35,18 +35,18 @@ $(document).ready(function () {
 
 	$(".dz-default.dz-message > span").html("Pilih file untuk di import (.csv)");
 
-    $(".custom-file-input").on("change", function() {
-        let fileName = $(this).val().split("\\").pop();
-        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-    });
+	$(".custom-file-input").on("change", function () {
+		let fileName = $(this).val().split("\\").pop();
+		$(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
 
-    $(".insert").on("click", function (e) { 
-        $("#tambah-transaksi").css("display", "none");
-    })
-    
-    $(".active").on("click", function (e) { 
-        $("#tambah-transaksi").css("display", "block");
-    })
+	$(".insert").on("click", function (e) {
+		$("#tambah-transaksi").css("display", "none");
+	});
+
+	$(".active").on("click", function (e) {
+		$("#tambah-transaksi").css("display", "block");
+	});
 });
 
 $(document).on("submit", "#form_import_transaksi", function (e) {
@@ -55,37 +55,33 @@ $(document).on("submit", "#form_import_transaksi", function (e) {
 		type: "post",
 		url: "http://localhost/aplikasikas/file/fImportTransaksi",
 		data: new FormData(this),
-        dataType: "json",
-		contentType: false, 
-        cache: false, 
-        processData: false, 
+		dataType: "json",
+		contentType: false,
+		cache: false,
+		processData: false,
 		beforeSend: function () {
-			let timerInterval
+			let timerInterval;
 			Swal.fire({
-                width: '100px',
+				width: "100px",
 				timer: 2000,
 				timerProgressBar: true,
 				didOpen: () => {
-					Swal.showLoading()
+					Swal.showLoading();
 				},
 				willClose: () => {
-					clearInterval(timerInterval)
-				}
-			})
+					clearInterval(timerInterval);
+				},
+			});
 		},
 		success: function (data) {
 			console.log(data);
-            document.querySelector("#csv-file-transaksi").value = null;
-			$("#modal_tambah_transaksi").modal('hide');
+			document.querySelector("#csv-file-transaksi").value = null;
+			$("#modal_tambah_transaksi").modal("hide");
 			$("#tombol-import-csv").attr("disabled", false);
-			Swal.fire(
-			    'Sukses!',
-			    data.message,
-			    'success'
-			);
-			$('#tabel_transaksi').DataTable().destroy();
+			Swal.fire("Sukses!", data.message, "success");
+			$("#tabel_transaksi").DataTable().destroy();
 			ambilDataPemasukan();
-		}
+		},
 	});
 });
 
@@ -94,20 +90,20 @@ $(document).on("click", "#tambah-transaksi", function (e) {
 
 	let angkaRandom = Math.floor(Math.random() * 900000) + 100000;
 
-	let idanggota = $('#nama').find(":selected").val();
-	let tanggal = $('#tanggal').val();
-	let nominal = $('#nominal').val();
-	let rincian = $('#rincian').val();
-	let jenis = $('#jenis').find(":selected").val();
+	let idanggota = $("#nama").find(":selected").val();
+	let tanggal = $("#tanggal").val();
+	let nominal = $("#nominal").val();
+	let rincian = $("#rincian").val();
+	let jenis = $("#jenis").find(":selected").val();
 
-	let tanggalBersih = tanggal.replaceAll('-', '');
+	let tanggalBersih = tanggal.replaceAll("-", "");
 	console.log(tanggal);
 	console.log(tanggalBersih);
 
 	let noTransaksi = "IM-" + angkaRandom + "-" + tanggalBersih;
-	$('#notransaksi').val(noTransaksi);
+	$("#notransaksi").val(noTransaksi);
 
-	let notransaksi = $('#notransaksi').val();
+	let notransaksi = $("#notransaksi").val();
 
 	$.ajax({
 		type: "post",
@@ -123,29 +119,21 @@ $(document).on("click", "#tambah-transaksi", function (e) {
 		dataType: "json",
 		success: function (data) {
 			if (data.responce == "success") {
-				$("#modal_tambah_transaksi").modal('hide');
-				$('#tabel_transaksi').DataTable().destroy();
+				$("#modal_tambah_transaksi").modal("hide");
+				$("#tabel_transaksi").DataTable().destroy();
 				ambilDataPemasukan();
-				Swal.fire(
-					'Success!',
-					data.message,
-					'success'
-				);
+				Swal.fire("Success!", data.message, "success");
 			} else {
-				Swal.fire(
-					'Failed!',
-					data.message,
-					'error'
-				)
+				Swal.fire("Failed!", data.message, "error");
 			}
-		}
+		},
 	});
 });
 
 $(document).on("click", "#detail-transaksi", function (e) {
 	e.preventDefault();
 
-	let id = $(this).data('id');
+	let id = $(this).data("id");
 
 	$(".notransaksi").css("display", "block");
 	$('label[for="notransaksi"]').css("display", "block");
@@ -162,30 +150,48 @@ $(document).on("click", "#detail-transaksi", function (e) {
 		url: "http://localhost/aplikasikas/transaksi/ambilDataById",
 		dataType: "json",
 		data: {
-			id: id
+			id: id,
 		},
 		success: function (data) {
 			let element = data[0];
 
-			$('#nama').val(element.idanggota).attr({
-				'readonly': true,
-				'disabled': true
-			}).css("background-color", "#fff");
-			$('#notransaksi').val(element.notransaksi).attr('readonly', true).css("background-color", "#fff");
-			$('#tanggal').val(element.tanggal).attr('readonly', true).css("background-color", "#fff");
-			$('#nominal').val(element.nominal).attr('readonly', true).css("background-color", "#fff");
-			$('#rincian').val(element.rincian).attr('readonly', true).css("background-color", "#fff");
-			$('#jenis').val(element.jenis).attr({
-				'readonly': true,
-				'disabled': true
-			}).css("background-color", "#fff");
-		}
+			$("#nama")
+				.val(element.idanggota)
+				.attr({
+					readonly: true,
+					disabled: true,
+				})
+				.css("background-color", "#fff");
+			$("#notransaksi")
+				.val(element.notransaksi)
+				.attr("readonly", true)
+				.css("background-color", "#fff");
+			$("#tanggal")
+				.val(element.tanggal)
+				.attr("readonly", true)
+				.css("background-color", "#fff");
+			$("#nominal")
+				.val(element.nominal)
+				.attr("readonly", true)
+				.css("background-color", "#fff");
+			$("#rincian")
+				.val(element.rincian)
+				.attr("readonly", true)
+				.css("background-color", "#fff");
+			$("#jenis")
+				.val(element.jenis)
+				.attr({
+					readonly: true,
+					disabled: true,
+				})
+				.css("background-color", "#fff");
+		},
 	});
 });
 
 $(document).on("click", "#edit-transaksi", function (e) {
 	e.preventDefault();
-	let id = $(this).data('id');
+	let id = $(this).data("id");
 
 	$("#tambah-transaksi").html("Edit Data");
 	$("#tambah-transaksi").attr("id", "update-transaksi");
@@ -200,30 +206,33 @@ $(document).on("click", "#edit-transaksi", function (e) {
 		url: "http://localhost/aplikasikas/transaksi/edit",
 		dataType: "json",
 		data: {
-			id: id
+			id: id,
 		},
 		success: function (data) {
-			$('#notransaksi').val(data.post[0].notransaksi).attr({
-				'readonly': true,
-				'disabled': true
-			}).css("background-color", "#fff");
-			$('#nama').val(data.post[0].idanggota);
-			$('#idtransaksi').val(data.post[0].idtransaksi)
-			$('#tanggal').val(data.post[0].tanggal);
-			$('#nominal').val(data.post[0].nominal);
-			$('#rincian').val(data.post[0].rincian);
-			$('#jenis').val(data.post[0].jenis);
-		}
+			$("#notransaksi")
+				.val(data.post[0].notransaksi)
+				.attr({
+					readonly: true,
+					disabled: true,
+				})
+				.css("background-color", "#fff");
+			$("#nama").val(data.post[0].idanggota);
+			$("#idtransaksi").val(data.post[0].idtransaksi);
+			$("#tanggal").val(data.post[0].tanggal);
+			$("#nominal").val(data.post[0].nominal);
+			$("#rincian").val(data.post[0].rincian);
+			$("#jenis").val(data.post[0].jenis);
+		},
 	});
 });
 
 $(document).on("click", "#update-transaksi", function () {
-	let idanggota = $('#nama').find(":selected").val();
-	let idtransaksi = $('#idtransaksi').val();
-	let tanggal = $('#tanggal').val();
-	let nominal = $('#nominal').val();
-	let rincian = $('#rincian').val();
-	let jenis = $('#jenis').find(":selected").val();
+	let idanggota = $("#nama").find(":selected").val();
+	let idtransaksi = $("#idtransaksi").val();
+	let tanggal = $("#tanggal").val();
+	let nominal = $("#nominal").val();
+	let rincian = $("#rincian").val();
+	let jenis = $("#jenis").find(":selected").val();
 
 	$.ajax({
 		type: "post",
@@ -234,27 +243,19 @@ $(document).on("click", "#update-transaksi", function () {
 			tanggal: tanggal,
 			nominal: nominal,
 			rincian: rincian,
-			jenis: jenis
+			jenis: jenis,
 		},
 		dataType: "json",
 		success: function (data) {
 			if (data.responce == "success") {
-				$("#modal_tambah_transaksi").modal('hide');
-				$('#tabel_transaksi').DataTable().destroy();
+				$("#modal_tambah_transaksi").modal("hide");
+				$("#tabel_transaksi").DataTable().destroy();
 				ambilDataPemasukan();
-				Swal.fire(
-					'Success!',
-					data.message,
-					'success'
-				)
+				Swal.fire("Success!", data.message, "success");
 			} else {
-				Swal.fire(
-					'Failed!',
-					data.message,
-					'error'
-				)
+				Swal.fire("Failed!", data.message, "error");
 			}
-		}
+		},
 	});
 });
 
@@ -266,50 +267,41 @@ $(document).on("click", "#hapus-transaksi", function (e) {
 
 	const swalWithBootstrapButtons = Swal.mixin({
 		customClass: {
-			confirmButton: 'btn btn-success',
-			cancelButton: 'btn btn-danger mr-2'
+			confirmButton: "btn btn-success",
+			cancelButton: "btn btn-danger mr-2",
 		},
-		buttonsStyling: false
+		buttonsStyling: false,
 	});
 
 	Swal.fire({
-		title: 'Apakah Yakin?',
+		title: "Apakah Yakin?",
 		text: "Data Ini Akan Dihapus!",
-		icon: 'warning',
+		icon: "warning",
 		showCancelButton: true,
-		confirmButtonColor: '#3085d6',
-		cancelButtonColor: '#d33',
-		confirmButtonText: 'Hapus Data!'
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Hapus Data!",
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
 				type: "post",
 				url: "http://localhost/aplikasikas/transaksi/hapus",
 				data: {
-					id_hapus: id_hapus
+					id_hapus: id_hapus,
 				},
 				dataType: "json",
 				success: function (data) {
 					if (data.responce == "success") {
-						$('#tabel_transaksi').DataTable().destroy();
+						$("#tabel_transaksi").DataTable().destroy();
 						ambilDataPemasukan();
-						swalWithBootstrapButtons.fire(
-							'Success!',
-							data.message,
-							'success'
-						);
+						swalWithBootstrapButtons.fire("Success!", data.message, "success");
 					} else {
-						swalWithBootstrapButtons.fire(
-							'Failed!',
-							data.message,
-							'error'
-						);
+						swalWithBootstrapButtons.fire("Failed!", data.message, "error");
 					}
-				}
+				},
 			});
 		}
 	});
-
 });
 
 function ambilDataPemasukan() {
@@ -318,41 +310,45 @@ function ambilDataPemasukan() {
 		url: "http://localhost/aplikasikas/transaksi/ambilData",
 		dataType: "json",
 		success: function (data) {
-			let i = "0",
-				a;
+			let a = "";
 			let nominal = 0;
 			for (let j = 0; j < data.post.length; j++) {
 				let element = parseInt(data.post[j].nominal);
 				nominal += element;
 			}
 
+			let i = 0;
+
 			$("#tabel_transaksi").DataTable({
 				processing: true,
 				data: data.post,
-				dom:  "<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4 tombol-download'B><'col-sm-12 col-md-5 tab-search'f>>" +
-						"<'row'<'col-sm-12'tr>>" +
-						"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-                buttons: [
-                    {
-                        text: 'Download CSV',
-                        className: "btn btn-success",
-                        action: function ( e, dt, node, config ) {
-                            location = 'http://localhost/aplikasikas/file/fExportTransaksi';
-                        }
-                    }
-                ],
+				order: [["0", "desc"]],
+				dom:
+					"<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4 tombol-download'B><'col-sm-12 col-md-5 tab-search'f>>" +
+					"<'row'<'col-sm-12'tr>>" +
+					"<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+				buttons: [
+					{
+						text: "Download CSV",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							location = "http://localhost/aplikasikas/file/fExportTransaksi";
+						},
+					},
+				],
 				language: {
 					search: "_INPUT_",
-					searchPlaceholder: "Search..."
+					searchPlaceholder: "Search...",
 				},
-				columns: [{
-						"render": function () {
-							return ++i;
-						}
+				columns: [
+					{
+						render: function (data, type, row, meta) {
+							return meta.row + 1;
+						},
 					},
 					{
-						"data": null,
-						"render": function (data, type, row, meta) {
+						data: null,
+						render: function (data, type, row, meta) {
 							a = `
                             <a class="btn btn-sm btn-primary" href="#" data-id="${row.id}" data-toggle="modal" data-target="#modal_tambah_transaksi" id="detail-transaksi" title="Detail Data"><i class="mdi mdi-information-outline"></i></a>
                             <a class="btn btn-sm btn-warning text-light" data-id="${row.id}" text-light" href="" role="button" id="edit-transaksi" data-toggle="modal" data-target="#modal_tambah_transaksi" title="Edit Data"><i class="mdi mdi-lead-pencil"></i></a>
@@ -360,26 +356,26 @@ function ambilDataPemasukan() {
                             <a class="btn btn-sm btn-success text-light" value="${row.id}" name="kwitansi" href="http://localhost/aplikasikas/transaksi/cetak/${row.id}" target="_blank" role="button" id="cetak-transaksi" title="Cetak Kwitansi"><i class="mdi mdi-printer"></i></a>
                             `;
 							return a;
-						}
+						},
 					},
 					{
-						"data": "notransaksi"
+						data: "notransaksi",
 					},
 					{
-						"data": "nama"
+						data: "nama",
 					},
 					{
-						"data": "jenis"
+						data: "jenis",
 					},
 					{
-						"data": "nominal",
-						"render": function (data, type, row) {
-							return 'Rp ' + new Intl.NumberFormat(['ban', 'id']).format(data);
-						}
+						data: "nominal",
+						render: function (data, type, row) {
+							return "Rp " + new Intl.NumberFormat(["ban", "id"]).format(data);
+						},
 					},
 				],
 			});
-		}
+		},
 	});
 }
 ambilDataPemasukan();

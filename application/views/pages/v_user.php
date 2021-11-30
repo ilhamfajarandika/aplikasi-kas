@@ -7,7 +7,9 @@ foreach ($user as $row) : ?>
 
         <!-- Simple card -->
         <div class="card m-b-30">
-            <img class="card-img-top img-fluid" src="https://picsum.photos/1600/1050?random=?<?= $i++; ?>" alt="Card image cap">
+            <img class="card-img-top img-fluid" src="https://picsum.photos/1600/1050?nature=?<?= $i++; ?>" alt="Card image cap">
+            <div class="card-profile">
+            </div>
             <!-- <img class="card-img-top img-fluid" src="https://source.unsplash.com/1600x1050/?<?= $i++; ?>" alt="Card image cap"> -->
             <!-- <img class="card-img-top img-fluid" src="<?php //echo base_url("vendor/assets/images/small/img-1.jpg"); 
                                                             ?>" alt="Card image cap"> -->

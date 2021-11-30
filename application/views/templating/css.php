@@ -1,4 +1,6 @@
  <link rel="shortcut icon" href=" <?= base_url(); ?>dist/assets/images/favicon.ico">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/style.css">
+
 
  <link href=" <?= base_url(); ?>dist/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
  <link href=" <?= base_url(); ?>dist/assets/css/icons.css" rel="stylesheet" type="text/css">
@@ -54,8 +56,10 @@
      }
 
      .accountbg {
-         /* background: url(https://source.unsplash.com/1225x725/?nature); */
-         background: url(https://picsum.photos/1225/725?nature);
+         background: url(https://source.unsplash.com/1225x725/?nature);
+         background-position: center;
+         background-size: cover;
+         /* background: url(https://picsum.photos/1225/725?nature); */
      }
 
      li.list-group-item.card-text {
@@ -83,22 +87,32 @@
      }
 
      #clock {
-         margin: 8px;
-         font-size: 1.2em;
-     }
-
-     #clock::after {
-         content: "";
-         display: inline-block;
-         position: absolute;
-         border-right: 1.4px solid black;
-         margin-left: 8px;
-         height: 80px;
-         bottom: -4px;
+         margin: 0;
+         padding: 0;
+         font-size: 1.06em;
      }
 
      #tanggal {
-
          margin: 8px;
      }
- </style>
+     .card-header-title {
+         padding: 0;
+     }
+
+     .card-profile {
+         position: absolute;
+         top: 10%;
+         right: 30%;
+         font-size: 7em;
+         color: #fff;
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         background: url(https://source.unsplash.com/1600x1050/?person);
+         background-position: center;
+         background-size: cover;
+         background-clip: content-box;
+         background-repeat: no-repeat;
+         border: 4px solid #fff;
+     }
+</style>

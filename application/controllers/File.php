@@ -10,6 +10,7 @@ class File extends CI_Controller
         parent::__construct();
         $this->load->helper(['url', 'download']);
         $this->load->model('Model_file', 'file');
+        date_default_timezone_set('Asia/Jakarta');
         if (!$this->session->userdata('nama')) {
             redirect('login', 'refresh');
         }
@@ -50,7 +51,7 @@ class File extends CI_Controller
     public function fExportTransaksi()
     {
         // nama file
-        $rFileName = 'data_transaksi_' . date("Ymd") . '.csv';
+        $rFileName = 'data_transaksi_' . mt_rand(100, 2000) . '.csv';
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=$rFileName");
         header("Content-Type: application/csv; ");
@@ -78,11 +79,14 @@ class File extends CI_Controller
 
             // config lib upload
             $rFilePath = APPPATH . '../dist/assets/file/upload/';
+            $rNewName = sha1(rand()).'.csv';
             $config = [
                 'upload_path' => $rFilePath,
                 'allowed_types' => 'csv',
                 'overwrite' => true,
                 'max_size' => 1024000 * 100000,
+                'encrypt_name' => true,
+                'file_name' => $rNewName
             ];
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
@@ -109,16 +113,16 @@ class File extends CI_Controller
                             if ($i == 1) continue;
                             $tanggal = explode('/', $row[1]);
 
-                            if (strlen(trim($row[0] . $row[1] . $row[2] . $row[3] . $row[4] . $row[5] . $row[6])) > 0) {
+                            if (strlen(trim($row[0] . $row[1] . $row[2] . $row[3] . $row[4] . $row[5])) > 0) {
                                 // data yang diinsert ke db transaksi
                                 $rDataInsert = [
-                                    'idanggota' => $row[6],
-                                    'notransaksi' => $row[0],
+                                    'idanggota' => $row[5],
+                                    'notransaksi' => 'MG-' . mt_rand(1000, 6000). '-' . date("Ymd"),
                                     'indikator' => $rNamaUser . '-MG@' . $rTanggal . '.' . $rJam,
-                                    'tanggal' => $tanggal[2] . '-' . $tanggal[1] . '-' . $tanggal[0],
-                                    'nominal' => $row[2],
-                                    'rincian' => $row[3],
-                                    'jenis' => $row[4]
+                                    'tanggal' => $row[0],
+                                    'nominal' => $row[1],
+                                    'rincian' => $row[2],
+                                    'jenis' => $row[3]
                                 ];
 
                                 $this->file->insert('transaksi', $rDataInsert); // insert data ke database

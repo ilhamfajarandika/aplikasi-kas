@@ -1,11 +1,11 @@
-no_trans;tanggal;nominal;uraian;jenis;nama;idanggota
-MG-444401-1;2021-09-01;122000;misedap;K;Aldi;1
-MG-444382-2;2021-08-30;20000;indomie;M;Agus;2
-MG-444322-3;2021-08-24;120000;Pemakaman;M;Agus;2
-MG-444402-4;2021-09-01;123000;makan;K;Agus;2
-MG-444402-5;2021-09-01;253000;makan;K;Agus;2
-MG-444412-6;2021-09-02;20000;makan;M;Agus;2
-MG-444482-7;2021-09-09;12000;minum;M;Agus;2
-MG-444423-8;2021-09-03;600000;Pemasukan Anggota;M;Sukri;3
-MG-444194-9;2021-08-11;250000;gaus;M;Denis;4
-MG-444454-10;2021-09-06;87000;Makan;K;Denis;4
+tanggal;nominal;uraian;jenis;nama;idanggota
+2021-09-01;122000;misedap;K;Aldi;1
+2021-08-30;20000;indomie;M;Agus;2
+2021-08-24;120000;Pemakaman;M;Agus;2
+2021-09-01;123000;makan;K;Agus;2
+2021-09-01;253000;makan;K;Agus;2
+2021-09-02;20000;makan;M;Agus;2
+2021-09-09;12000;minum;M;Agus;2
+2021-09-03;600000;Pemasukan Anggota;M;Sukri;3
+2021-08-11;250000;gaus;M;Denis;4
+2021-09-06;87000;Makan;K;Denis;4
