@@ -11,9 +11,7 @@ class File extends CI_Controller
         $this->load->helper(['url', 'download']);
         $this->load->model('Model_file', 'file');
         date_default_timezone_set('Asia/Jakarta');
-        if (!$this->session->userdata('nama')) {
-            redirect('login', 'refresh');
-        }
+        if (!$this->session->userdata('nama')) {redirect('login', 'refresh');}
     }
 
     public function download()

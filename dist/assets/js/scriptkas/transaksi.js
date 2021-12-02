@@ -322,7 +322,7 @@ function ambilDataPemasukan() {
 			$("#tabel_transaksi").DataTable({
 				processing: true,
 				data: data.post,
-				order: [["0", "desc"]],
+				// order: [["3", "desc"]],
 				dom:
 					"<'row'<'col-sm-12 col-md-3'l><'col-sm-12 col-md-4 tombol-download'B><'col-sm-12 col-md-5 tab-search'f>>" +
 					"<'row'<'col-sm-12'tr>>" +
@@ -360,6 +360,16 @@ function ambilDataPemasukan() {
 					},
 					{
 						data: "notransaksi",
+					},
+					{
+						data: null,
+						render: function (row) {
+							let tanggal = row.tanggal.split("-");
+							let bukantanggal = row.tanggal.split(" ");
+							console.log(bukantanggal);
+							let rTanggal = `${tanggal[2]}-${tanggal[1]}-${tanggal[0]}`;
+							return rTanggal;
+						},
 					},
 					{
 						data: "nama",

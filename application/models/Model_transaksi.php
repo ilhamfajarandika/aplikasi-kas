@@ -6,6 +6,7 @@ class Model_transaksi extends CI_Model
 {
     public function getAllDataTransaksi()
     {
+        $this->db->order_by('id', 'DESC');
         return $this->db->get('vtransaksi')->result();
     }
 

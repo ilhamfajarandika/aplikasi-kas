@@ -1,0 +1,9 @@
+website data
+username : sim-kas
+domain : sim-kas.0000webhost.com
+password : eKD)ZNb)rkAx4fHRbh*a
+
+database info
+database : id18047507_kas
+username : id18047507_sim_kas
+password : (i}34/~DKL)U}c+<
