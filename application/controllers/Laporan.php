@@ -133,7 +133,7 @@ class Laporan extends CI_Controller
         $pdf->Cell(40, 11, '-', 1, 0, 'C');
         $pdf->Cell(70, 11, '-', 1, 0, 'C');
         $pdf->Cell(75, 11, 'Saldo Awal', 1, 0, 'C');
-        $pdf->Cell(20, 11, 'M', 1, 0, 'C');
+        $pdf->Cell(20, 11, '-', 1, 0, 'C');
         $pdf->Cell(40, 11, 'Rp 0', 1, 0, 'C');
         $pdf->Cell(40, 11, 'Rp 0', 1, 0, 'C');
         $pdf->Cell(40, 11, ($saldoAwal == NULL) ? 'Rp 0' : 'Rp ' .  number_format($saldoAwal[0]['saldoawal'], 0, ".", "."), 1, 1, 'C');
