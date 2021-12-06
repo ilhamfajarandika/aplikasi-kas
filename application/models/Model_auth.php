@@ -10,19 +10,15 @@ class Model_auth extends CI_Model
         return $this->db->insert('user', $data);
     }
 
+    public function ambilDataUser()
+    {
+        $this->db->order_by('iduser', 'desc');
+        return $this->db->get('vuser')->result();
+    }
+
     public function cekLogin($email, $password)
     {
         return $user = $this->db->get_where('user', ["email" => $email])->row_array();
-
-        // if (!empty($cek)) {
-        //     if (password_verify($password, $user->password)) {
-        //         return $user->result();
-        //     } else {
-        //         return FALSE;
-        //     }
-        // } else {
-        //     return FALSE;
-        // }
     }
 }
 

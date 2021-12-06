@@ -19,19 +19,30 @@ class Transaksi extends CI_Controller
 
     public function index()
     {
-        $data = [
-            'title' => 'Kas - Transaksi',
-            'judul_halaman' => 'Halaman Transaksi',
-            'judul_modal' => 'Input Transaksi',
-            'judul_tombol' => 'Tambah Data',
-            'kanan_atas' => '
+        $tombolModal = "";
+        if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2) {
+            $tombolModal = '
                 <a id="download-template-transaksi" href="http://localhost/aplikasikas/file/download/template_transaksi" title="Download Template Input Transaksi (.csv)" class="btn btn-success waves-effect waves-light m-b-10 m-r-5 text-light">
                     Download Template
                 </a>
                 <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_transaksi">
                     Input Transaksi
                 </button>
-            ',
+            ';
+        } else {
+            $tombolModal = '
+                <ol class="breadcrumb p-0 m-t-10">
+                    <li class="breadcrumb-item"><a href="#">Kas</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/transaksi') . '">Transaksi</a></li>
+                </ol>
+            ';
+        }
+        $data = [
+            'title' => 'Kas - Transaksi',
+            'judul_halaman' => 'Halaman Transaksi',
+            'judul_modal' => 'Input Transaksi',
+            'judul_tombol' => 'Tambah Data',
+            'kanan_atas' => $tombolModal,
             'halaman' => $this->load->view('pages/v_transaksi', '', true),
         ];
         $this->parser->parse('template_admin', $data);

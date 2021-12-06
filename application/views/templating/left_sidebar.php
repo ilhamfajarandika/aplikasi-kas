@@ -61,12 +61,14 @@
                         <span> Anggota</span>
                     </a>
                 </li>
-                <li>
-                    <a href="<?= base_url("user"); ?>" class="waves-effect">
-                        <i class="mdi mdi-account-multiple"></i>
-                        <span> User</span>
-                    </a>
-                </li>
+                <?php if ($this->session->userdata('role') == 1) : ?>
+                    <li>
+                        <a href="<?= base_url("user"); ?>" class="waves-effect">
+                            <i class="mdi mdi-account-multiple"></i>
+                            <span> User</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="clearfix"></div>

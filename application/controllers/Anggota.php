@@ -17,17 +17,28 @@ class Anggota extends CI_Controller
 
     public function index()
     {
+
+        $tombolModal = "";
+        if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2) {
+            $tombolModal = '
+                <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_anggota">
+                    Tambah Anggota
+                </button>
+            ';
+        } else {
+            $tombolModal = '
+                <ol class="breadcrumb p-0 m-t-10">
+                    <li class="breadcrumb-item"><a href="#">Kas</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/anggota') . '">Anggota</a></li>
+                </ol>
+            ';
+        }
         $data = [
             'title' => 'Kas - Daftar Anggota',
             'judul_halaman' => 'Halaman Daftar Anggota',
             'judul_modal' => 'Tambah Anggota',
             'judul_tombol' => 'Tambah Data',
-            'kanan_atas' => '
-                
-                <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_anggota">
-                    Tambah Anggota
-                </button>
-            ',
+            'kanan_atas' => $tombolModal,
             'halaman' => $this->load->view('pages/v_anggota', '', true),
         ];
         $this->parser->parse('template_admin', $data);

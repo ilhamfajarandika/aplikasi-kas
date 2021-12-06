@@ -78,6 +78,7 @@
     <!-- END wrapper -->
 
     <?php require_once 'templating/js.php' ?>
+    <?php require_once 'templating/modal/modal_user.php' ?>
     <?php require_once 'templating/modal/modal_transaksi.php' ?>
     <?php require_once 'templating/modal/modal_anggota.php' ?>
 
@@ -86,6 +87,7 @@
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/transaksi.js"></script>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/anggota.js"></script>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/laporan.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/user.js"></script>
 
 </body>
 

@@ -93,7 +93,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary waves-effect" id="tombol-keluar"
-						data-dismiss="modal">Close</button>
+						data-dismiss="modal">Tutup</button>
 					<button type="button" class="btn btn-primary waves-effect waves-light"
 						id="tambah-transaksi">{judul_tombol}</button>
 				</div>

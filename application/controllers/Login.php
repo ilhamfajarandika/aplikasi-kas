@@ -49,35 +49,48 @@ class Login extends CI_Controller
                 $cek = $this->auth->cekLogin($email, $password);
 
                 if (!empty($cek)) {
-                    // if ($cek['is_active'] == 1) {
-                    if (password_verify($password, $cek['password'])) {
+                    if ($cek['role_id'] != null) {
+                        if (password_verify($password, $cek['password'])) {
 
-                        $session_data = [
-                            'nama' => $cek['nama']
-                        ];
-                        $this->session->set_userdata($session_data);
+                            $role = 0;
 
-                        $data = [
-                            'is_active' => 1
-                        ];
-                        $this->db->update('user', $data, ['nama' => $this->session->userdata('nama')]);
+                            if ($cek['role_id'] == 1) {
+                                $role = 1;
+                            } elseif ($cek['role_id'] == 2) {
+                                $role = 2;
+                            } else {
+                                $role = 3;
+                            }
+                            
+                            $session_data = [
+                                'nama' => $cek['nama'],
+                                'role' => $role
+                            ];
 
-                        $data = [
-                            'responce' => 'success',
-                            'message' => 'Berhasil Login!'
-                        ];
+                            $this->session->set_userdata($session_data);
+
+                            $data = [
+                                'is_active' => 1
+                            ];
+                            
+                            $this->db->update('user', $data, ['nama' => $this->session->userdata('nama')]);
+
+                            $data = [
+                                'responce' => 'success',
+                                'message' => 'Berhasil Login!'
+                            ];
+                        } else {
+                            $data = [
+                                'responce' => 'error',
+                                'message' => 'Password Salah!'
+                            ];
+                        }
                     } else {
                         $data = [
                             'responce' => 'error',
-                            'message' => 'Password Salah!'
+                            'message' => 'Gagal Login!'
                         ];
                     }
-                    // } else {
-                    //     $data = [
-                    //         'responce' => 'error',
-                    //         'message' => 'Email Tidak Aktif!'
-                    //     ];
-                    // }
                 } else {
                     $data = [
                         'responce' => 'error',
