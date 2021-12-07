@@ -12,6 +12,7 @@ class Transaksi extends CI_Controller
         $this->load->library('pdf');
         date_default_timezone_set("Asia/Jakarta");
         $this->load->helper('tanggal_helper');
+        $this->load->helper('terbilang_helper');
         if (!$this->session->userdata('nama')) {
             redirect('login', 'refresh');
         }
@@ -273,6 +274,10 @@ class Transaksi extends CI_Controller
         }
     }
 
+    // public function penyebut($nilai)
+    // {
+
+    // }
 
     public function cetak($id)
     {
@@ -282,7 +287,7 @@ class Transaksi extends CI_Controller
 
         $data = $this->db->get_where('vtransaksi', ['id' => $id])->result();
 
-        $pdf->RoundedRect(10, 15, 190, 128, 5, '1234', 'D');
+        $pdf->RoundedRect(10, 15, 190, 140, 5, '1234', 'D');
         $pdf->SetXY(15, 20);
         $pdf->Cell(180, 15, '', 0, 1, 'C');
 
@@ -328,26 +333,33 @@ class Transaksi extends CI_Controller
 
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->SetXY(20, 80);
-            $pdf->Cell(50, 10, 'Nominal      :', 0, 1, 'L');
+            $pdf->Cell(50, 10, 'Tanggal      :', 0, 1, 'L');
             $pdf->SetXY(48, 80);
+            $pdf->SetFont('Arial', 'I', 10);
+            $pdf->Cell(142, 8, date('d-m-Y', strtotime($row->tanggal)), 'B', 1, 'L');
+
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->SetXY(20, 91);
+            $pdf->Cell(50, 10, 'Nominal      :', 0, 1, 'L');
+            $pdf->SetXY(48, 91);
             $pdf->SetFont('Arial', 'I', 10);
             $pdf->Cell(142, 8, 'Rp ' . $row->nominal, 'B', 1, 'L');
 
             $pdf->SetFont('Arial', 'B', 12);
-            $pdf->SetXY(20, 91);
-            $pdf->Cell(50, 10, 'Tanggal      :', 0, 1, 'L');
-            $pdf->SetXY(48, 91);
+            $pdf->SetXY(20, 102);
+            $pdf->Cell(50, 10, 'Terbilang    :', 0, 1, 'L');
+            $pdf->SetXY(48, 102);
             $pdf->SetFont('Arial', 'I', 10);
-            $pdf->Cell(142, 8, date('d-m-Y', strtotime($row->tanggal)), 'B', 1, 'L');
+            $pdf->Cell(142, 8, terbilang($row->nominal) . ' rupiah', 'B', 1, 'L');
         }
 
-        $pdf->SetXY(150, 50);
+        $pdf->SetXY(150, 60);
         $pdf->Cell(20, 120, 'Malang, ' . tanggalLaporan(date('Y-m-d')), 0, 1, 'C');
 
-        $pdf->SetXY(150, 70);
+        $pdf->SetXY(150, 80);
         $pdf->Cell(20, 120, $this->session->userdata('nama'), 0, 1, 'C');
 
-        $pdf->SetXY(95, 79);
+        $pdf->SetXY(95, 90);
         $pdf->Cell(20, 120, 'Printed_' . date('d-m-Y') . '_' . date('H:i:s') . '_' .  $this->session->userdata('nama'), 0, 1, 'C');
 
         $pdf->SetFont('Arial', 'B', 14);
