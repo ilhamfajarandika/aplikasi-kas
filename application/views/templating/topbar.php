@@ -13,10 +13,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profile</a>
-                    <a class="dropdown-item" href="#"><i class="mdi mdi-account-settings-variant m-r-5 text-muted"></i> Settings</a>
+                    <a class="dropdown-item" href="<?= base_url('user/infouser') ?>"><i class="mdi mdi-account-circle m-r-5 text-muted"></i> Profil User</a>
+                    <a class="dropdown-item" href="<?= base_url('user/ubahpassword') ?>"><i class="mdi mdi-account-settings-variant m-r-5 text-muted"></i> Ubah Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="" id="logout"><i class="mdi mdi-logout-variant m-r-5 text-muted"></i> Logout</a>
+                    <a class="dropdown-item" href="" id="logout"><i class="mdi mdi-logout-variant m-r-5 text-muted"></i> Log Out</a>
                 </div>
             </li>
 

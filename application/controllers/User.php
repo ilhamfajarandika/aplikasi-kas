@@ -10,6 +10,7 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->model('Model_auth', 'auth');
         date_default_timezone_set("Asia/Jakarta");
+        $this->load->helper('tanggal_helper');
         if (!$this->session->userdata('nama')) {
             redirect('login', 'refresh');
         }
@@ -129,6 +130,98 @@ class User extends CI_Controller
 
             echo json_encode($data);
             $this->session->set_flashdata('pesan', 'Akun Sudah Anda Registrasi!');
+        }
+    }
+    public function infoUser()
+    {
+        $data = [
+            'title' => 'Kas - Daftar User',
+            'judul_modal' => 'Input User',
+            'judul_tombol' => 'Tambah Data',
+            'judul_halaman' => 'Halaman Daftar User',
+            'kanan_atas' => '
+                <ol class="breadcrumb p-0 m-t-10">
+                    <li class="breadcrumb-item"><a href="' . base_url() . '">Kas</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/user') . '">User</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/user/infouser') . '">Info User</a></li>
+                </ol>
+            ',
+            'halaman' => $this->load->view('pages/v_info_user', '', true),
+        ];
+        $this->parser->parse('template_admin', $data);
+    }
+
+    public function ubahPassword()
+    {
+        $data = [
+            'title' => 'Kas - Daftar User',
+            'judul_modal' => 'Input User',
+            'judul_tombol' => 'Tambah Data',
+            'judul_halaman' => 'Halaman Daftar User',
+            'kanan_atas' => '
+                <ol class="breadcrumb p-0 m-t-10">
+                    <li class="breadcrumb-item"><a href="' . base_url() . '">Kas</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/user') . '">User</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url('/user/ubahpassword') . '">Ubah Password</a></li>
+                </ol>
+            ',
+            'halaman' => $this->load->view('pages/v_ubah_password', '', true),
+        ];
+        $this->parser->parse('template_admin', $data);
+    }
+
+    public function ubah()
+    {
+        if ($this->input->is_ajax_request()) {
+            $password = $this->input->post('password');
+            $newPassword = $this->input->post('newPassword');
+            $confirmPassword = $this->input->post('confirmPassword');
+            $user = $this->auth->getDataByEmail($this->session->userdata('email'));
+
+            if (password_verify($password, $user['password'])) {
+                if ($password != null && $newPassword != null && $confirmPassword != null) {
+                    if (strlen($newPassword) >= 3) {
+                        if ($password != $newPassword) {
+                            if ($newPassword == $confirmPassword) {
+                                $this->db->set('password', password_hash($newPassword, PASSWORD_DEFAULT));
+                                $this->db->where('email', $user['email']);
+                                $this->db->update('user');
+
+                                $data = [
+                                    'response' => 'success',
+                                    'message' => 'Password berhasil diubah'
+                                ];
+                            } else {
+                                $data = [
+                                    'response' => 'error',
+                                    'message' => 'Password baru dan konfirmasi password tidak sama'
+                                ];
+                            }
+                        } else {
+                            $data = [
+                                'response' => 'error',
+                                'message' => 'Password baru sama dengan password lama!'
+                            ];
+                        }
+                    } else {
+                        $data = [
+                            'response' => 'error',
+                            'message' => 'Password baru harus lebih dari 3 karakter!'
+                        ];
+                    }
+                } else {
+                    $data = [
+                        'response' => 'error',
+                        'message' => 'Field tidak boleh kosong!'
+                    ];
+                }
+            } else {
+                $data = [
+                    'response' => 'error',
+                    'message' => 'Password lama anda salah!'
+                ];
+            }
+            echo json_encode($data);
         }
     }
 }

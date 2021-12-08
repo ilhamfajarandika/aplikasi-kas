@@ -22,9 +22,9 @@ class Laporan extends CI_Controller
             'title' => 'Kas - Laporan Transaksi',
             'judul_halaman' => 'Halaman Laporan Transaksi',
             'kanan_atas' => '
-                <ol class="breadcrumb hide-phone p-0 m-0">
-                    <li class="breadcrumb-item"><a href="#">Kas</a></li>
-                    <li class="breadcrumb-item"><a href="#">Laporan</a></li>
+                <ol class="breadcrumb p-0 m-t-10">
+                    <li class="breadcrumb-item"><a href="' . base_url() . '">Kas</a></li>
+                    <li class="breadcrumb-item"><a href' . base_url('laporan') . '">Laporan</a></li>
                 </ol>
             ',
             'halaman' => $this->load->view('pages/v_laporan', '', true),

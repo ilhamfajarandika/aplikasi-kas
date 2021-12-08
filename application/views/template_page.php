@@ -32,6 +32,7 @@
 
     <?php require_once 'templating/js.php' ?>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/auth.js"></script>
+    <script src="<?= base_url(); ?>dist/assets/js/scriptkas/user.js"></script>
 
 
 </body>

@@ -25,7 +25,14 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-12">
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                            <div class="input-group">
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Password">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary d-flex align-items-center" type="button">
+                                        <i class="mdi mdi-eye mdi-18px btn-see"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

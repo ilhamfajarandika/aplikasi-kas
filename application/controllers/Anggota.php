@@ -28,7 +28,7 @@ class Anggota extends CI_Controller
         } else {
             $tombolModal = '
                 <ol class="breadcrumb p-0 m-t-10">
-                    <li class="breadcrumb-item"><a href="#">Kas</a></li>
+                    <li class="breadcrumb-item"><a href="' . base_url() . '">Kas</a></li>
                     <li class="breadcrumb-item"><a href="' . base_url('/anggota') . '">Anggota</a></li>
                 </ol>
             ';

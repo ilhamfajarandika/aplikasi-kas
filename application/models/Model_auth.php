@@ -20,6 +20,11 @@ class Model_auth extends CI_Model
     {
         return $user = $this->db->get_where('user', ["email" => $email])->row_array();
     }
+
+    public function getDataByEmail($email)
+    {
+        return $this->db->get_where('user', ['email' => $email])->row_array();
+    }
 }
 
 /* End of file Model_auth.php */

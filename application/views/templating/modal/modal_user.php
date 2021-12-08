@@ -20,10 +20,14 @@
                         </div>
                         <div class="form-group">
                             <label for="passwordUser">Password</label>
-                            <input class="form-control" type="password" value="password" name="passwordUser" id="passwordUser" autocomplete="off">
-                            <span class="see-password">
-                                <i class="mdi mdi-eye btn-see"></i>
-                            </span>
+                            <div class="input-group">
+                                <input class="form-control" type="password" value="password" name="passwordUser" id="passwordUser" autocomplete="off">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary d-flex align-items-center" type="button">
+                                        <i class="mdi mdi-eye mdi-18px btn-see"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="gambarUser">Gambar</label>

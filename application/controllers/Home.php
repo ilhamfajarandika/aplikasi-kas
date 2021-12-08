@@ -50,7 +50,7 @@ class Home extends CI_Controller
             'keluar' => $rDataTransaksi['keluar'],
             'saldo' => $rDataTransaksi['saldo'],
             'kanan_atas' => '
-                <ol class="breadcrumb hide-phone p-0 m-0">
+                <ol class="breadcrumb p-0 m-t-10">
                     <li class="breadcrumb-item"><a href="#">Kas</a></li>
                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 </ol>

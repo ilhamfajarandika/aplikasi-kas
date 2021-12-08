@@ -61,10 +61,11 @@ class Login extends CI_Controller
                             } else {
                                 $role = 3;
                             }
-                            
+
                             $session_data = [
                                 'nama' => $cek['nama'],
-                                'role' => $role
+                                'role' => $role,
+                                'email' => $cek['email']
                             ];
 
                             $this->session->set_userdata($session_data);
@@ -72,7 +73,7 @@ class Login extends CI_Controller
                             $data = [
                                 'is_active' => 1
                             ];
-                            
+
                             $this->db->update('user', $data, ['nama' => $this->session->userdata('nama')]);
 
                             $data = [

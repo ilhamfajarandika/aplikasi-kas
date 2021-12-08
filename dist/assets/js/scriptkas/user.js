@@ -1,13 +1,29 @@
 $(document).ready(function () {
-	$(".see-password").on("click", function (el) {
-		const lihatPassword = $(".btn-see");
+	let btn = $("button.btn.btn-primary.d-flex.align-items-center");
+	$(btn).on("click", function (el) {
+		let target = el.target;
 
-		lihatPassword.toggleClass("mdi-eye-off");
-		lihatPassword.toggleClass("mdi-eye");
+		if (target.classList.contains("mdi")) {
+			target.classList.toggle("mdi-eye-off");
+			target.classList.toggle("mdi-eye");
 
-		lihatPassword.hasClass("mdi-eye-off")
-			? $("#password-user").attr("type", "text")
-			: $("#password-user").attr("type", "password");
+			target.classList.contains("mdi-eye-off")
+				? $(".input-group-append").prev().attr("type", "text")
+				: $(".input-group-append").prev().attr("type", "password");
+		} else if (target.classList.contains("btn")) {
+			target.firstElementChild.classList.toggle("mdi-eye-off");
+			target.firstElementChild.classList.toggle("mdi-eye");
+
+			target.firstElementChild.classList.contains("mdi-eye-off")
+				? target.parentElement.previousElementSibling.setAttribute(
+						"type",
+						"text"
+				  )
+				: target.parentElement.previousElementSibling.setAttribute(
+						"type",
+						"password"
+				  );
+		}
 	});
 });
 
@@ -61,6 +77,60 @@ $("#tambah-user").on("click", function () {
 	});
 });
 
+$("#submit-ubah-password").on("click", function (e) {
+	e.preventDefault();
+	Swal.fire({
+		title: "Apakah Yakin?",
+		text: "Sandi akan diubah!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Ubah Sandi!",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			let password = $("#password").val();
+			let newPassword = $("#password-baru").val();
+			let confirmPassword = $("#konfirmasi-password").val();
+
+			$.ajax({
+				type: "post",
+				url: "http://localhost/aplikasikas/user/ubah",
+				data: {
+					password: password,
+					newPassword: newPassword,
+					confirmPassword: confirmPassword,
+				},
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					if (data.response == "success") {
+						Swal.fire({
+							title: "Success!",
+							text: data.message,
+							icon: "success",
+							confirmButtonColor: "#3085d6",
+							confirmButtonText: "OK",
+						}).then((result) => {
+							if (result.isConfirmed) {
+								$("#password").val("");
+								$("#password-baru").val("");
+								$("#konfirmasi-password").val("");
+							}
+						});
+					} else {
+						Swal.fire({
+							title: "Error!",
+							text: data.message,
+							icon: "error",
+						});
+					}
+				},
+			});
+		}
+	});
+});
+
 function ambilDataUser() {
 	$.ajax({
 		type: "post",
@@ -86,8 +156,8 @@ function ambilDataUser() {
 								<i title="${
 									value.is_active == 1 ? "User Aktif" : "User Tidak Aktif"
 								}" class="mdi mdi-checkbox-blank-circle is-aktif ml-2 ${
-									value.is_active == 1 ? "text-primary" : "text-danger"
-								}" style="font-size: 1rem;"></i>
+					value.is_active == 1 ? "text-primary" : "text-danger"
+				}" style="font-size: 1rem;"></i>
 							</h4>
 							<ul class="list-group list-group-flush m-b-10">
 								<li class="list-group-item card-text" title="Email" id="email-user">

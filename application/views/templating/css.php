@@ -101,21 +101,6 @@
      }
 
      .card-profile {
-         /* position: absolute;
-         top: 10%;
-         right: 30%;
-         font-size: 7em;
-         color: #fff;
-         width: 150px;
-         height: 150px;
-         background: url(https://source.unsplash.com/1600x1050/?person);
-         border-radius: 50%;
-         background-position: center;
-         background-size: cover;
-         background-clip: content-box;
-         background-repeat: no-repeat;
-         border: 4px solid #fff; */
-
          position: absolute;
          top: 10%;
          right: 30%;
@@ -127,17 +112,36 @@
      .card-profile>* {
          border-radius: 50%;
          border: 4px solid #fff;
-
      }
 
      .see-password {
          position: absolute;
-         right: 30px;
-         top: 50.2%;
+         left: 90%;
      }
 
      .see-password>* {
          font-size: 1.1em;
          cursor: pointer;
+     }
+
+     .btn-see {
+         z-index: -2;
+     }
+
+     .card-profile.profile-picture {
+         position: relative;
+         top: 25%;
+         height: 160px;
+         width: 160px;
+         border-radius: 50%;
+     }
+
+     .card-profile-left {
+         margin: 25px 0 20px;
+     }
+
+     .card-img>img {
+         object-fit: cover;
+         width: 100%;
      }
  </style>
