@@ -23,7 +23,7 @@ class User extends CI_Controller
         if ($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2) {
             $tombolModal = '
                 <button type="button" class="btn btn-primary waves-effect waves-light m-b-10" data-toggle="modal" data-target="#modal_tambah_user">
-                    Input User Baru
+                    <i class="mdi mdi-account-plus mdi-24px"></i>
                 </button>
             ';
         } else {
@@ -223,6 +223,40 @@ class User extends CI_Controller
             }
             echo json_encode($data);
         }
+    }
+
+    public function resetPassword()
+    {
+        if ($this->input->is_ajax_request()) {
+            $password = $this->input->post('password');
+            $id = $this->input->post('id');
+
+            $this->db->set('password', password_hash($password, PASSWORD_DEFAULT));
+            $this->db->where('iduser', $id);
+            $this->db->update('user');
+
+            $data = [
+                'response' => 'success',
+                'message' => 'Password berhasil direset'
+            ];
+
+            echo json_encode($data);
+        }
+    }
+
+    public function hapusUser()
+    {
+        $id = $this->input->post('id');
+
+        $this->db->where('iduser', $id);
+        $this->db->delete('user');
+
+        $data = [
+            'response' => 'success',
+            'message' => 'User berhasil dihapus'
+        ];
+
+        echo json_encode($data);
     }
 }
 

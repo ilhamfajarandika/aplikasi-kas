@@ -7,7 +7,7 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <div class="text-center">
-            <a href="<?= base_url(); ?>" class="logo"><i class="mdi mdi-cash"></i> Kas Kelas</a>
+            <a href="<?= base_url(); ?>" class="logo"><i class="mdi mdi-minecraft"></i> Kas Kelas</a>
         </div>
     </div>
 

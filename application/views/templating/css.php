@@ -144,4 +144,12 @@
          object-fit: cover;
          width: 100%;
      }
+
+     .dropdown-item {
+         padding: .55rem 1rem !important;
+     }
+
+     .dropdown-item:hover>* {
+         color: #343a40 !important;
+     }
  </style>

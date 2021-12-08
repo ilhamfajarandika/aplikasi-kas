@@ -103,7 +103,6 @@ $("#submit-ubah-password").on("click", function (e) {
 				},
 				dataType: "json",
 				success: function (data) {
-					console.log(data);
 					if (data.response == "success") {
 						Swal.fire({
 							title: "Success!",
@@ -131,6 +130,83 @@ $("#submit-ubah-password").on("click", function (e) {
 	});
 });
 
+$(document).on("click", ".hapus-user", function (e) {
+	e.preventDefault();
+	let id = $(this).data("userid");
+	let nama = $(this).data("username");
+
+	Swal.fire({
+		title: "Warning!",
+		text: "Anda akan menghapus akun " + nama,
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Hapus!",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			console.log("hapus");
+			$.ajax({
+				type: "post",
+				url: "http://localhost/aplikasikas/user/hapususer",
+				data: {
+					id: id,
+				},
+				dataType: "json",
+				success: function (data) {
+					console.log(data);
+					Swal.fire({
+						title: "Success!",
+						text: data.message,
+						icon: "success",
+						confirmButtonColor: "#3085d6",
+						confirmButtonText: "OK",
+					});
+					$("#container").empty();
+					ambilDataUser();
+				},
+			});
+		}
+	});
+});
+
+$(document).on("click", ".reset-password", function (e) {
+	e.preventDefault();
+	let id = $(this).data("userid");
+	let nama = $(this).data("username");
+
+	Swal.fire({
+		title: "Warning!",
+		text: "Anda akan mereset password " + nama,
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#3085d6",
+		cancelButtonColor: "#d33",
+		confirmButtonText: "Reset Password!",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				type: "post",
+				url: "http://localhost/aplikasikas/user/resetpassword",
+				data: {
+					password: "password",
+					id: id,
+				},
+				dataType: "json",
+				success: function (data) {
+					Swal.fire({
+						title: "Success!",
+						text: data.message,
+						icon: "success",
+						confirmButtonColor: "#3085d6",
+						confirmButtonText: "OK",
+					});
+				},
+			});
+		}
+	});
+});
+
 function ambilDataUser() {
 	$.ajax({
 		type: "post",
@@ -151,27 +227,53 @@ function ambilDataUser() {
 							<img src="https://picsum.photos/150/150?person${i}" alt="Card image cap">
 						</div>
 						<div class="card-body" id="profile-user">
-							<h4 class="card-title font-20 mt-0 mb-10" id="nama-user">
-								${value.nama}
-								<i title="${
-									value.is_active == 1 ? "User Aktif" : "User Tidak Aktif"
-								}" class="mdi mdi-checkbox-blank-circle is-aktif ml-2 ${
+							<h4 class="card-title font-20 my-2 mx-2 d-flex justify-content-between align-items-center" id="nama-user">
+								<span>
+									<span class="nama">
+										${value.nama}
+									</span>
+									<i title="${
+										value.is_active == 1 ? "User Aktif" : "User Tidak Aktif"
+									}" class="mdi mdi-checkbox-blank-circle is-aktif ml-2 ${
 					value.is_active == 1 ? "text-primary" : "text-danger"
 				}" style="font-size: 1rem;"></i>
+								</span>
+								<div class="dropdown notification-list">
+									<button class="dropdown-toggle btn btn-primary arrow-none waves-effect text-light" data-toggle="dropdown" type="button" role="button" aria-haspopup="false" aria-expanded="false">
+										<i class="mdi mdi-settings btn-reset"></i>
+									</button>
+									<div class="dropdown-menu dropdown-menu-right profile-dropdown bg-primary">
+										<a class="dropdown-item text-light hapus-user" data-userid="${
+											value.iduser
+										}" data-username="${
+					value.nama
+				}" href="#"><i class="mdi mdi-delete m-r-5 text-light"></i> <span>Hapus User</span></a>
+					                    <div class="dropdown-divider text-light my-1 mx-3"></div>
+										<a class="dropdown-item text-light reset-password" data-userid="${
+											value.iduser
+										}" data-username="${
+					value.nama
+				}" href="#"><i class="mdi mdi-account-convert m-r-5 text-light"></i> <span>Reset Password</span></a>
+									</div>
+								</div>
 							</h4>
-							<ul class="list-group list-group-flush m-b-10">
-								<li class="list-group-item card-text" title="Email" id="email-user">
-									${value.email}
+							<ul class="list-group list-group-flush my-2 mx-n2">
+				                <li class="list-group-item d-flex justify-content-between align-items-center" style="border-top: none;">
+									Email
+									<span> ${value.email} </span>
 								</li>
-								<li class="list-group-item card-text" title="Role">
-									${roleUser}
+				                <li class="list-group-item d-flex justify-content-between align-items-center">
+									Role
+									<span> ${roleUser} </span>
 								</li>
-								<li class="list-group-item card-text" title="Tanggal Registrasi">
-									${tanggalDibuat}
+								<li class="list-group-item d-flex justify-content-between align-items-center">
+									Tanggal Registrasi
+									<span> ${tanggalDibuat} </span>
 								</li>
-								<li class="list-group-item card-text" title="Terakhir Online">
-									${tanggal.split("-").reverse().join("-")}
-									${jam}
+				                <li class="list-group-item d-flex justify-content-between align-items-center">
+									Terakhir Online
+									<span> ${tanggal.split("-").reverse().join("-")} ${jam} </span>
+									
 								</li> 
 							</ul>
 						</div>
