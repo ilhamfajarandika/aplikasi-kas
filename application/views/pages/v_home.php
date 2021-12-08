@@ -11,18 +11,18 @@
 		<div class="card m-b-30">
 			<div class="card-header bg-primary d-flex rounded justify-content-between align-items-center py-3 px-4">
 				<h5 class="m-0 header-title text-light">
-                    <?php
-                        $tanggal = tanggalLaporan(date('Y-m-d'));
-                        $hari = substr($tanggal, 0, 2);
-                        $bulan = bulanLaporan(date('Y-m-d'));
-                        $tahun = date('Y');
+					<?php
+					$tanggal = tanggalLaporan(date('Y-m-d'));
+					$hari = substr($tanggal, 0, 2);
+					$bulan = bulanLaporan(date('Y-m-d'));
+					$tahun = date('Y');
 
-                        echo "{$hari} {$bulan} {$tahun}";
-                        ?>
-                </h5>
+					echo "{$hari} {$bulan} {$tahun}";
+					?>
+				</h5>
 				<h5 class=" text-light" id="clock"></h5>
 			</div>
-			
+
 		</div>
 	</div>
 	<!-- <ul>
@@ -36,7 +36,7 @@
 <script src="https://cdn.jsdelivr.net/gh/wrick17/calendar-plugin@master/calendar.min.js"></script>
 
 <script>
-    $('tanggal').calendar();
+	$('tanggal').calendar();
 	const tahun = new Date();
 
 	function fWaktu() {
@@ -50,7 +50,7 @@
 		detik = updateWaktu(detik);
 
 		document.getElementById("clock").innerText = jam + " : " + menit;
-		var t = setTimeout(function () {
+		var t = setTimeout(function() {
 			fWaktu()
 		}, 1000);
 	}
@@ -69,9 +69,28 @@
 		type: "post",
 		url: "http://localhost/aplikasikas/home/chart",
 		dataType: "json",
-		success: function (data) {
-			var dTran = data;
-			var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+		success: function(data) {
+			var dTran = data,
+				months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+			let arr3 = [],
+				arr4 = [];
+
+			let arr = Object.values(dTran);
+			for (let i = 0; i < months.length; i++) {
+				let [arr2] = arr[i];
+				arr3.push(arr2);
+			}
+
+			arr3.forEach(el => {
+				Object.values(el).forEach(m => {
+					if (m == null) {
+						m = 0;
+					}
+					arr4.push(m);
+				})
+			});
+			let max = Math.max(...arr4);
+
 
 			function dataMasuk(bulan) {
 				var dMasuk;
@@ -152,10 +171,10 @@
 				data: rData,
 				xkey: 'tahun',
 				ykeys: ['masuk', 'keluar'],
-				ymax: 5000000,
+				ymax: max,
 				labels: ['Kas Masuk', 'Kas Keluar'],
 				hideHover: true,
-				xLabelFormat: function (x) { // <--- x.getMonth() returns valid index
+				xLabelFormat: function(x) { // <--- x.getMonth() returns valid index
 					var month = months[x.getMonth()];
 					return month;
 				},
@@ -163,5 +182,4 @@
 			})
 		}
 	});
-
 </script>
