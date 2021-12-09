@@ -2,6 +2,9 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 class File extends CI_Controller
 {
 
@@ -10,8 +13,11 @@ class File extends CI_Controller
         parent::__construct();
         $this->load->helper(['url', 'download']);
         $this->load->model('Model_file', 'file');
+        $this->load->helper('tanggal_helper');
         date_default_timezone_set('Asia/Jakarta');
-        if (!$this->session->userdata('nama')) {redirect('login', 'refresh');}
+        if (!$this->session->userdata('nama')) {
+            redirect('login', 'refresh');
+        }
     }
 
     public function download()
@@ -49,7 +55,7 @@ class File extends CI_Controller
     public function fExportTransaksi()
     {
         // nama file
-        $rFileName = 'data_transaksi_' . mt_rand(100, 2000) . '.csv';
+        $rFileName = 'data_transaksi_' . date("d_m_Y") . '.csv';
         header("Content-Description: File Transfer");
         header("Content-Disposition: attachment; filename=$rFileName");
         header("Content-Type: application/csv; ");
@@ -71,13 +77,120 @@ class File extends CI_Controller
         exit;
     }
 
+    public function fExpostTransaksiExcel()
+    {
+        $spreadsheet = new Spreadsheet;
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // style header kolom tabel
+        $style_col = [
+            'font' => ['bold' => true], // font jadi bold
+            'alignment' => [
+                'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER, // text center secara horizontal
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER, // text center secara vertikal
+            ],
+            'borders' => [
+                'top' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+            ], // set border dengan garis tipis
+
+        ];
+
+        $style_row = [
+            'alignment' => [
+                'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER // text center secara vertikal
+            ],
+            'borders' => [
+                'top' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'right' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'bottom' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN],
+                'left' => ['borderStyle'  => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN]
+            ] // set border dengan garis tipis
+        ];
+
+        // set title file
+        $sheet->setCellValue('A1', 'Data Transaksi');
+        $sheet->mergeCells('A1:G1');
+        $sheet->getStyle('A1')->applyFromArray($style_col);
+
+        // set header file
+        $sheet->setCellValue('A2', 'No');
+        $sheet->setCellValue('B2', 'Nomor Transaksi');
+        $sheet->setCellValue('C2', 'Nama Anggota');
+        $sheet->setCellValue('D2', 'Tanggal');
+        $sheet->setCellValue('E2', 'Nominal');
+        $sheet->setCellValue('F2', 'Rincian');
+        $sheet->setCellValue('G2', 'Jenis');
+
+        // style header 
+        $sheet->getStyle('A2')->applyFromArray($style_col);
+        $sheet->getStyle('B2')->applyFromArray($style_col);
+        $sheet->getStyle('C2')->applyFromArray($style_col);
+        $sheet->getStyle('D2')->applyFromArray($style_col);
+        $sheet->getStyle('E2')->applyFromArray($style_col);
+        $sheet->getStyle('F2')->applyFromArray($style_col);
+        $sheet->getStyle('G2')->applyFromArray($style_col);
+
+        $dTransaksi = $this->file->getAllData('vtransaksi');
+        $no = 1;
+        $numRow = 3;
+        foreach ($dTransaksi as $row) {
+            $sheet->setCellValue('A' . $numRow, $no);
+            $sheet->setCellValue('B' . $numRow, $row["notransaksi"]);
+            $sheet->setCellValue('C' . $numRow, $row["nama"]);
+            $sheet->setCellValue('D' . $numRow, reverseDate($row["tanggal"]));
+            $sheet->setCellValue('E' . $numRow, $row["nominal"]);
+            $sheet->setCellValue('F' . $numRow, $row["rincian"]);
+            $sheet->setCellValue('G' . $numRow, $row["jenis"]);
+
+            // style row 
+            $sheet->getStyle('A' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('B' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('C' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('D' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('E' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('F' . $numRow)->applyFromArray($style_row);
+            $sheet->getStyle('G' . $numRow)->applyFromArray($style_row);
+
+            $no++;
+            $numRow++;
+        }
+
+        // set width kolom
+        $sheet->getColumnDimension('A')->setWidth(10);
+        $sheet->getColumnDimension('B')->setWidth(20);
+        $sheet->getColumnDimension('C')->setWidth(25);
+        $sheet->getColumnDimension('D')->setWidth(13);
+        $sheet->getColumnDimension('E')->setWidth(13);
+        $sheet->getColumnDimension('F')->setWidth(15);
+        $sheet->getColumnDimension('G')->setWidth(13);
+
+        // set tinggi baris secara default
+        $sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+
+        $sheet->setTitle('Data Transaksi');
+
+        // Proses file excel
+        $filename = 'data_transaksi_' . date("d_m_Y") . '.xlsx';
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename=' . $filename); // Set nama file excel nya
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save("php://output");
+    }
+
     public function fImportTransaksi()
     {
         if ($this->input->is_ajax_request()) {
 
             // config lib upload
             $rFilePath = APPPATH . '../dist/assets/file/upload/';
-            $rNewName = sha1(rand()).'.csv';
+            $rNewName = sha1(rand()) . '.csv';
             $config = [
                 'upload_path' => $rFilePath,
                 'allowed_types' => 'csv',
@@ -115,7 +228,7 @@ class File extends CI_Controller
                                 // data yang diinsert ke db transaksi
                                 $rDataInsert = [
                                     'idanggota' => $row[5],
-                                    'notransaksi' => 'MG-' . mt_rand(1000, 6000). '-' . date("Ymd"),
+                                    'notransaksi' => 'MG-' . mt_rand(1000, 6000) . '-' . date("Ymd"),
                                     'indikator' => $rNamaUser . '-MG@' . $rTanggal . '.' . $rJam,
                                     'tanggal' => $row[0],
                                     'nominal' => $row[1],

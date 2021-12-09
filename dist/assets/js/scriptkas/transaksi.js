@@ -330,9 +330,17 @@ function ambilDataPemasukan() {
 				buttons: [
 					{
 						text: "Download CSV",
-						className: "btn btn-success",
+						className: "btn btn-primary",
 						action: function (e, dt, node, config) {
 							location = "http://localhost/aplikasikas/file/fExportTransaksi";
+						},
+					},
+					{
+						text: "Download Excel",
+						className: "btn btn-success",
+						action: function (e, dt, node, config) {
+							location =
+								"http://localhost/aplikasikas/file/fExpostTransaksiExcel";
 						},
 					},
 				],

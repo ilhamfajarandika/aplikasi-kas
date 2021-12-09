@@ -33,3 +33,16 @@ if (!function_exists('bulanLaporan')) {
         }
     }
 }
+
+if (!function_exists('reverseDate')) {
+    function reverseDate($tanggal)
+    {
+        if ($tanggal == null) {
+            return 'Null';
+        } else {
+            $dTanggal = explode('-', $tanggal);
+
+            return $dTanggal[2] . '-' . $dTanggal[1] . '-' . $dTanggal[0];
+        }
+    }
+}
