@@ -14,6 +14,12 @@ class Model_file extends CI_Model
     {
         return $this->db->get($tabel)->result_array();
     }
+
+    public function getAllDataTransaksi($tabel)
+    {
+        $this->db->order_by('tanggal', 'asc');
+        return $this->db->get($tabel)->result_array();
+    }
 }
 
 /* End of file Model_file.php */

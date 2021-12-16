@@ -61,7 +61,7 @@ class File extends CI_Controller
         header("Content-Type: application/csv; ");
 
         // ambil data 
-        $rDataAnggota = $this->file->getAllData('vtransaksi');
+        $rDataAnggota = $this->file->getAllDataTransaksi('vtransaksi');
 
         // membuat file
         $rFile = fopen('php://output', 'w');
@@ -133,7 +133,7 @@ class File extends CI_Controller
         $sheet->getStyle('F2')->applyFromArray($style_col);
         $sheet->getStyle('G2')->applyFromArray($style_col);
 
-        $dTransaksi = $this->file->getAllData('vtransaksi');
+        $dTransaksi = $this->file->getAllDataTransaksi('vtransaksi');
         $no = 1;
         $numRow = 3;
         foreach ($dTransaksi as $row) {

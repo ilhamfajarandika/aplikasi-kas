@@ -1,6 +1,6 @@
 website data
 username : sim-kas
-domain : sim-kas.0000webhost.com
+domain : https://sim-kas.000webhostapp.com/
 password : eKD)ZNb)rkAx4fHRbh*a
 
 database info
