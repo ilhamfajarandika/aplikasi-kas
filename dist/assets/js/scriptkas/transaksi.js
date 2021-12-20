@@ -1,3 +1,4 @@
+// let base_url = "http://localhost:85/aplikasikas/";
 $(document).ready(function () {
 	const label = $("#label_modal_tambah_transaksi");
 
@@ -53,7 +54,7 @@ $(document).on("submit", "#form_import_transaksi", function (e) {
 	e.preventDefault();
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/file/fImportTransaksi",
+		url: base_url + "file/fImportTransaksi",
 		data: new FormData(this),
 		dataType: "json",
 		contentType: false,
@@ -107,7 +108,7 @@ $(document).on("click", "#tambah-transaksi", function (e) {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/transaksi/tambah",
+		url: base_url + "transaksi/tambah",
 		data: {
 			idanggota: idanggota,
 			notransaksi: notransaksi,
@@ -147,7 +148,7 @@ $(document).on("click", "#detail-transaksi", function (e) {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/transaksi/ambilDataById",
+		url: base_url + "transaksi/ambilDataById",
 		dataType: "json",
 		data: {
 			id: id,
@@ -203,7 +204,7 @@ $(document).on("click", "#edit-transaksi", function (e) {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/transaksi/edit",
+		url: base_url + "transaksi/edit",
 		dataType: "json",
 		data: {
 			id: id,
@@ -236,7 +237,7 @@ $(document).on("click", "#update-transaksi", function () {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/transaksi/update",
+		url: base_url + "transaksi/update",
 		data: {
 			idtransaksi: idtransaksi,
 			idanggota: idanggota,
@@ -285,7 +286,7 @@ $(document).on("click", "#hapus-transaksi", function (e) {
 		if (result.isConfirmed) {
 			$.ajax({
 				type: "post",
-				url: "http://localhost/aplikasikas/transaksi/hapus",
+				url: base_url + "transaksi/hapus",
 				data: {
 					id_hapus: id_hapus,
 				},
@@ -307,7 +308,7 @@ $(document).on("click", "#hapus-transaksi", function (e) {
 function ambilDataPemasukan() {
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/transaksi/ambilData",
+		url: base_url + "transaksi/ambilData",
 		dataType: "json",
 		success: function (data) {
 			let a = "";
@@ -332,15 +333,14 @@ function ambilDataPemasukan() {
 						text: "Download CSV",
 						className: "btn btn-primary",
 						action: function (e, dt, node, config) {
-							location = "http://localhost/aplikasikas/file/fExportTransaksi";
+							location = base_url + "file/fExportTransaksi";
 						},
 					},
 					{
 						text: "Download Excel",
 						className: "btn btn-success",
 						action: function (e, dt, node, config) {
-							location =
-								"http://localhost/aplikasikas/file/fExpostTransaksiExcel";
+							location = base_url + "file/fExpostTransaksiExcel";
 						},
 					},
 				],
@@ -361,7 +361,7 @@ function ambilDataPemasukan() {
                             <a class="btn btn-sm btn-primary" href="#" data-id="${row.id}" data-toggle="modal" data-target="#modal_tambah_transaksi" id="detail-transaksi" title="Detail Data"><i class="mdi mdi-information-outline"></i></a>
                             <a class="btn btn-sm btn-warning text-light" data-id="${row.id}" text-light" href="" role="button" id="edit-transaksi" data-toggle="modal" data-target="#modal_tambah_transaksi" title="Edit Data"><i class="mdi mdi-lead-pencil"></i></a>
                             <a class="btn btn-sm btn-danger" data-id="${row.id}" href="" role="button" id="hapus-transaksi" title="Hapus Data"><i class="mdi mdi-delete"></i></a>
-                            <a class="btn btn-sm btn-success text-light" value="${row.id}" name="kwitansi" href="http://localhost/aplikasikas/transaksi/cetak/${row.id}" target="_blank" role="button" id="cetak-transaksi" title="Cetak Kwitansi"><i class="mdi mdi-printer"></i></a>
+                            <a class="btn btn-sm btn-success text-light" value="${row.id}" name="kwitansi" href=base_url+"transaksi/cetak/${row.id}" target="_blank" role="button" id="cetak-transaksi" title="Cetak Kwitansi"><i class="mdi mdi-printer"></i></a>
                             `;
 							return a;
 						},

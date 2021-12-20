@@ -1,3 +1,5 @@
+// let base_url = "http://localhost:85/aplikasikas/";
+
 $(document).ready(function () {
 	let btn = $("button.btn.btn-primary.d-flex.align-items-center");
 	$(btn).on("click", function (el) {
@@ -36,7 +38,7 @@ $("#tambah-user").on("click", function () {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/user/tambah",
+		url: base_url + "user/tambah",
 		data: {
 			namaUser: namaUser,
 			emailUser: emailUser,
@@ -61,7 +63,7 @@ $("#tambah-user").on("click", function () {
 						$("#modal_tambah_user").modal("hide");
 						$.ajax({
 							type: "post",
-							url: "http://localhost/aplikasikas/user/ambil",
+							url: base_url + "user/ambil",
 							dataType: "json",
 							success: function (data) {
 								$("#container").empty();
@@ -95,7 +97,7 @@ $("#submit-ubah-password").on("click", function (e) {
 
 			$.ajax({
 				type: "post",
-				url: "http://localhost/aplikasikas/user/ubah",
+				url: base_url + "user/ubah",
 				data: {
 					password: password,
 					newPassword: newPassword,
@@ -148,7 +150,7 @@ $(document).on("click", ".hapus-user", function (e) {
 			console.log("hapus");
 			$.ajax({
 				type: "post",
-				url: "http://localhost/aplikasikas/user/hapususer",
+				url: base_url + "user/hapususer",
 				data: {
 					id: id,
 				},
@@ -187,7 +189,7 @@ $(document).on("click", ".reset-password", function (e) {
 		if (result.isConfirmed) {
 			$.ajax({
 				type: "post",
-				url: "http://localhost/aplikasikas/user/resetpassword",
+				url: base_url + "user/resetpassword",
 				data: {
 					password: "password",
 					id: id,
@@ -210,7 +212,7 @@ $(document).on("click", ".reset-password", function (e) {
 function ambilDataUser() {
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/user/ambil",
+		url: base_url + "user/ambil",
 		dataType: "json",
 		success: function (data) {
 			$.each(data.post, function (index, value) {

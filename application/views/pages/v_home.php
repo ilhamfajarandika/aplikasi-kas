@@ -67,7 +67,7 @@
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/home/chart",
+		url: "http://localhost:85/aplikasikas/home/chart",
 		dataType: "json",
 		success: function(data) {
 			var dTran = data,

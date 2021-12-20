@@ -1,3 +1,5 @@
+// let base_url = "http://localhost:85/aplikasikas/";
+
 $(document).ready(function () {
 	const tanggal = new Date();
 	const hariAwal =
@@ -23,7 +25,7 @@ $(document).on("click", "#cetak-laporan", function () {
 
 	$.ajax({
 		type: "post",
-		url: "http://localhost/aplikasikas/laporan/cetak",
+		url: base_url + "laporan/cetak",
 		data: {
 			modeltable: modeltable,
 			tanggalakhir: tanggalakhir,
@@ -32,15 +34,9 @@ $(document).on("click", "#cetak-laporan", function () {
 		dataType: "json",
 		success: function (data) {
 			if (data.tabel == "border") {
-				window.open(
-					"http://localhost/aplikasikas/laporan/cetak" + data.tabel,
-					"_blank"
-				);
+				window.open(base_url + "laporan/cetak" + data.tabel, "_blank");
 			} else {
-				window.open(
-					"http://localhost/aplikasikas/laporan/cetak" + data.tabel,
-					"_blank"
-				);
+				window.open(base_url + "laporan/cetak" + data.tabel, "_blank");
 			}
 		},
 	});

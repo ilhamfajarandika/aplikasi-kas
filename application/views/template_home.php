@@ -129,6 +129,9 @@
     <?php require_once 'templating/modal/modal_anggota.php' ?>
 
     <!-- Script Kas -->
+    <script>
+        let base_url = "http://localhost:85/aplikasikas/";
+    </script>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/auth.js"></script>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/transaksi.js"></script>
     <script src="<?= base_url(); ?>dist/assets/js/scriptkas/anggota.js"></script>
